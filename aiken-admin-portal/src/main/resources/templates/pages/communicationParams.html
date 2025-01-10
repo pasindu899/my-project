@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Device Report</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="m-4">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <h1>Device Report</h1>
+            <div class="button-container">
+                <form action="/admin-portal/view-reports/download-excel/comParams" method="get">
+                    <!-- Add hidden input field to include the selected bank as a query parameter -->
+                    <input type="hidden" name="bank"
+                           th:value="${communicationDTO.size() > 0 ? communicationDTO[0].bankCode : ''}">
+                    <button type="submit" class="download-button"
+                            style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 4px;">
+                        Download CSV
+                    </button>
+                </form>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>Bank Code</th>
+                <th>Serial Number</th>
+                <th>Merchant Name</th>
+                <th>MID</th>
+                <th>TID</th>
+                <th>SIM_Operator_1</th>
+                <th>SIM_Serial_1</th>
+                <th>SIM_Operator_2</th>
+                <th>SIM_Serial_2</th>
+                <th>Device_MID</th>
+                <th>Device_TID</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Iterate over the listDevices and display each device -->
+            <tr th:each="communicationDTO : ${communicationDTO}">
+                <td th:text="${communicationDTO.bankCode}"></td>
+                <td th:text="${communicationDTO.serialNo}"></td>
+                <td th:text="${communicationDTO.merchantName}"></td>
+                <td th:text="${communicationDTO.mid}"></td>
+                <td th:text="${communicationDTO.tid}"></td>
+                <td th:text="${communicationDTO.operator1}"></td>
+                <td th:text="${communicationDTO.sim1}"></td>
+                <td th:text="${communicationDTO.operator2}"></td>
+                <td th:text="${communicationDTO.sim2}"></td>
+                <td th:text="${communicationDTO.ref1}"></td>
+                <td th:text="${communicationDTO.ref2}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div th:if="${totalPages > 1}" style="display: flex; justify-content: flex-end;">
+            <ul class="pagination" style="margin: 0 2rem;">
+                <li th:if="${currentPage > 0}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/admin-portal/view-reports/banks/comParams?bank=${communicationDTO.size() > 0 ? communicationDTO[0].bankCode : ''}&page=1&limit=10|}">
+                        First
+                    </a>
+                </li>
+
+                <li th:if="${currentPage > 0}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/admin-portal/view-reports/banks/comParams?bank=${communicationDTO.size() > 0 ? communicationDTO[0].bankCode : ''}&page=${currentPage - 1}&limit=10|}">
+                        Previous
+                    </a>
+                </li>
+
+                <!-- display a fixed number of page links -->
+                <li th:each="i : ${#numbers.sequence(currentPage - 4 < 0 ? 0 : currentPage - 4,
+                                               currentPage + 4 > totalPages - 1 ? totalPages - 1 : currentPage + 4)}"
+                    class="page-item" th:classappend="${currentPage == i} ? 'active'">
+                    <a class="page-link"
+                       th:href="@{|/admin-portal/view-reports/banks/comParams?bank=${communicationDTO.size() > 0 ? communicationDTO[0].bankCode : ''}&page=${i}&limit=10|}">
+                        <span th:text="${i + 1}">1</span>
+                    </a>
+                </li>
+
+                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/admin-portal/view-reports/banks/comParams?bank=${communicationDTO.size() > 0 ? communicationDTO[0].bankCode : ''}&page=${currentPage + 1}&limit=10|}">
+                        Next
+                    </a>
+                </li>
+
+                <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                    <a class="page-link"
+                       th:href="@{|/admin-portal/view-reports/banks/comParams?bank=${communicationDTO.size() > 0 ? communicationDTO[0].bankCode : ''}&page=${totalPages - 1}&limit=10|}">
+                        Last
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+</script>
+
+

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Merchant Validation</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="text-danger">Merchant Validation Fail</h1>
+						<p></p>
+						<h4 class="text-success" th:text="${error}"></h4>
+					</div>
+				</div>
+				<p></p>
+				<div class="row">
+					<div class="col-md-6">
+						<a th:href="@{${back_link}}" class="btn btn-primary"><i>
+								Back</i></a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+
+</body>
+</html>

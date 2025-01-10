@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Successful</title>
+
+<style>
+
+</style>
+<script type="text/javascript">
+</script>
+
+</head>
+<body class="body-color">
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="modalSuccess" class="modal hide fade in show" data-keyboard="false" data-backdrop="static">
+							<div class="modal-dialog modal-success">
+								<div class="modal-content">
+									<div class="modal-header">
+										<div class="icon-box">
+											<i class="material-icons ">&#xE876;</i>
+										</div>				
+										<h4 class="modal-title w-100">Successful</h4>	
+									</div>
+									<div class="modal-body">
+										<p class="text-center" th:text="${message}"></p>
+									</div>
+									<div class="modal-footer">
+										<a th:href="@{${back_link}}" class="btn btn-success btn-block"><i> OK</i></a>						
+									</div>
+								</div>
+							</div>
+						</div>          		                
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</div>
+
+	<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+
+</body>
+</html>

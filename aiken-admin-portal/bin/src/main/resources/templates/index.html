@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- 	 
+	Application Home Page
+	
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Welcome to Admin Portal</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="text-primary">Welcome to Aiken Admin Portal</h1>
+						<h3 class="text-success">Login as : <span th:text="${user}"></span></h3>
+
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<img src="../static/images/admin-portal.jpg"
+						th:src="@{images/admin-portal.jpg}" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

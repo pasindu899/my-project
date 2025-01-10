@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+
+<!-- @author Sajith Alahakoon-->
+<!-- @version 1.0-->
+<!-- @since 2024-12-03-->
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Common Configurations</title>
+
+    <script>
+
+        window.onscroll = function () {
+
+          scrollFunction();
+        };
+
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <section>
+
+        <div class="card-body">
+            <h3 class="text-primary">Common Configurations</h3>
+            <div class="align-right">
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="card">
+                    <form action="#" th:action="@{/admin-portal/update-Common-config}"
+                          th:object="${CommonConfigForm}" method="post" id="ConfigSettings">
+
+                        <div class="card-body">
+                            <h5 class="text-primary">Common Configurations</h5>
+                            <p></p>
+                            <div class="col-md-3">
+                                <div class="form-group input-group ">
+                                    <input id="profileValidation" type="checkbox" th:field="*{profileValidation}"
+                                           class="checkbox-format input-group-addon"/>
+                                    <span class="input-group-addon btnn-w250">Enable Profile Validation</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="card-body">
+                                <div class="col-md-12 align-right">
+                                    <input type="submit" class="btn btn-success" value="Update Changes"
+                                           id="btnUpdateChanges">
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>
+
+
+</body>
+</html>

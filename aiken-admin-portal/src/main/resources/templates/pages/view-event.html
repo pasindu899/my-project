@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--
+	@author Sajith Alahakoon
+	@version 1.0
+	@since 2024-09-26
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+
+<head>
+    <title>Event View</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <br>
+        <h3 class="text-primary">View Event Configurations</h3>
+        <br>
+        <div>
+
+            <form action="#" th:object="${device}">
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Please Correct Errors Below</p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Device Information</h5>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="serialNo" class="col-form-label">Serial No *</label>
+                                <input id="serialNo" type="text" th:field="*{serialNo}"
+                                       class="form-control" readonly/>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="bankName" class="col-form-label">Bank Name *</label>
+                                <input id="bankName" type="text" th:field="*{bankName}"
+                                       class="form-control" readonly/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="merchantName" class="col-form-label">Merchant Name *</label>
+                                <input id="merchantName" type="text"
+                                       th:field="*{merchantName}" class="form-control" readonly/>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="merchantAddress" class="col-form-label">Merchant
+                                    Address *</label> <input id="merchantAddress" type="text"
+                                                             th:field="*{merchantAddress}" class="form-control"
+                                                             readonly/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+            <br>
+            <form action="#" th:object="${eventForm}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>User Information </h5>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="addedBy" class="col-form-label">Added By</label>
+                                <input id="addedBy" type="text" th:field="*{addedBy}"
+                                       class="form-control" readonly/>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="addedDate" class="col-form-label">Added Date</label>
+                                <input id="addedDate" type="text" th:field="*{addedDate}"
+                                       class="form-control" readonly/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="updatedBy" class="col-form-label">Updated By</label>
+                                <input id="updatedBy" type="text"
+                                       th:field="*{updatedBy}" class="form-control" readonly/>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="updatedOn" class="col-form-label">Updated Date</label>
+                                <input id="updatedOn" type="text"
+                                       th:field="*{updatedOn}" class="form-control" readonly/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <br>
+        <div>
+            <form action="#"
+                  th:action="@{/admin-portal/new-event}"
+                  th:object="${eventForm}" method="post">
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Please Correct Errors Below</p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-primary">Event Type and Event Date & Time</h5>
+                        <div class="row">
+
+                            <div hidden>
+                                <input id="serialNo1" type="text"
+                                       th:field="*{serialNo}" class="hidden" readonly/>
+
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label class="col-form-label">Event Type*</label>
+                                <input id="eventType" th:field="*{eventType}"
+                                       class="form-control" readonly>
+
+                            </div>
+
+                            <div class="form-group col-md-3 display-off" id="merchTransType">
+                                <label for="merchantTransType" class="col-form-label">Transaction Type</label>
+                                <input id="merchantTransType" th:field="*{merchantTransType}"
+                                       class="form-control" readonly>
+                            </div>
+
+                            <div class="form-group col-md-3 display-off" id="merchantList">
+                                <label for="merchantList" class="col-form-label">Merchant</label>
+                                <input id="clearMerchant" th:field="*{clearMerchant}"
+                                       class="form-control" readonly>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="dateFrom" class="col-form-label">Event Start Date & Time *</label>
+                                <input id="dateFrom" type="datetime-local"
+                                       th:field="*{dateFrom}" class="form-control"
+                                       placeholder="YYYY-MM-DD-HH:MM" readonly/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dateTo" class="col-form-label">Event End Date & Time *</label>
+                                <input id="dateTo" th:field="*{dateTo}"
+                                       type="datetime-local" class="form-control"
+                                       placeholder="YYYY-MM-DD-HH:MM:SS" readonly/>
+                            </div>
+                            <div class="form-group col-md-3" id="onetime-Password">
+                                <label for="dateTo" class="col-form-label">Onetime Settings Password *</label>
+                                <input id="onetimePassword" type="text" pattern="\d{8}" th:field="*{onetimePassword}"
+                                       th:maxlength="8" th:minlength="8"
+                                       class="form-control" readonly/>
+                            </div>
+                        </div>
+                        <div class="display-off" id="div-report">
+                            <h6 class="text-primary">Transaction Type and Date Range</h6>
+                            <div class="row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="transactionType" class="col-form-label">Transaction Type *</label>
+                                    <input id="transactionType" th:field="*{type}"
+                                           class="form-control" readonly>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="reportFromDate" class="col-form-label">Report From (Date) *</label>
+                                    <input id="reportFromDate" type="date"
+                                           th:field="*{reportFromDate}" class="form-control"
+                                           placeholder="YYYY-MM-DD" readonly/>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="reportToDate" class="col-form-label">Report To (Date)*</label>
+                                    <input id="reportToDate" th:field="*{reportToDate}"
+                                           type="date" class="form-control"
+                                           placeholder="YYYY-MM-DD" readonly/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="text-primary">Execute Type </h6>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="col-form-label">Execute Type*</label>
+                                    <input id="executeType" th:field="*{executeType}"
+                                           class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 align-right">
+                                <div>
+                                    <a th:href="@{/admin-portal/view-events}"
+                                       class="btn btn-secondary"><i>Cancel</i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

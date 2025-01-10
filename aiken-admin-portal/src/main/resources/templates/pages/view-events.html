@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-07-22
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>View Events</title>
+    <meta http-equiv="refresh" content="60">
+    <script>
+
+        window.onscroll = function () {
+
+          scrollFunction();
+        };
+
+    </script>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <section>
+
+        <div class="card-body">
+            <h3 class="text-primary">Event Manager</h3>
+            <div class="align-right">
+                <a th:href="@{/admin-portal/select-device}" class="fa btn btn-info">
+                    Add New Event</a>
+            </div>
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <form action="#"
+                              th:action="@{/admin-portal/search-event-by-key(searchParam=${searchData})}"
+                              th:object="${commonData}" method="get">
+
+                            <div style="padding: 5px;">
+                                <p>Search with any text</p>
+
+                                <div class="form-group input-group">
+
+                                    <input type="text" class="form-control"
+                                           placeholder="Search any text ..." id="searchData"
+                                           th:field="*{searchData}" data-toggle="tooltip"
+                                           data-placement="top" title="Search any text here...">
+                                    <button class="btn "
+                                            th:classappend="${pageStatus.contains('Search Result of Text')} ? btn-secondary : btn-info"
+                                            type="submit"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="Click here to search" value="Search"
+                                            onclick="return CheckSearchText();">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <form th:action="@{/admin-portal/search-event}"
+                              th:object="${commonDataForm}" method="post">
+
+                            <div style="padding: 5px;">
+                                <p>Search Events with Date Range</p>
+
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">From Date</span> <input
+                                        type="date" class="form-control" placeholder="YYYY-MM-DD"
+                                        id="startDate" th:field="*{startDate}" data-toggle="tooltip"
+                                        data-placement="top" title="Enter search starting date here">
+                                    <span class="input-group-addon">To Date</span> <input
+                                        type="date" class="form-control" placeholder="YYYY-MM-DD"
+                                        id="endDate" th:field="*{endDate}" data-toggle="tooltip"
+                                        data-placement="top" title="Enter search ending date here">
+                                    <span class="input-group-btn">
+												<button class="btn "
+                                                        th:classappend="${pageStatus.contains('Search Result of Dates')} ? btn-secondary : btn-info"
+                                                        type="submit"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Search event for any date range" value="Search"
+                                                        onclick="return CheckSearchDates();">
+													<i class="fa fa-search"></i>
+												</button>
+											</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.col-lg-4 -->
+                    <div class="col-lg-4">
+
+
+                        <div style="padding: 5px;">
+                            <p>.</p>
+
+                            <div>
+                                <a th:href="@{/admin-portal/view-events}" class="btn "
+                                   th:classappend="${pageStatus.contains('Today Events')} ? btn-secondary : btn-info"
+                                   data-toggle="tooltip" data-placement="top"
+                                   title="Click here to view today events">Latest Events</a>&nbsp
+                                <!-- <a th:href="@{/admin-portal/view-all-events}"
+                                    class ="btn " th:classappend="${pageStatus.contains('All Events')} ? btn-secondary : btn-info" data-toggle="tooltip"
+                                    data-placement="top" title="Click here to view all events">All Events</a> -->
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.col-lg-2 -->
+
+                </div>
+
+            </div>
+
+
+            <div class="alert alert-info" align="center">
+                <span th:text="${pageStatus}"></span>
+            </div>
+
+
+            <table id="deviceTable" border="1"
+                   class="table table-striped table-bordered table-hover searchable sortable">
+
+                <thead>
+                <tr>
+                    <th class="theader">ID</th>
+                    <th class="theader">Serial No</th>
+                    <th class="theader">Merchant</th>
+                    <th class="theader">Event Name</th>
+                    <th class="theader">Type</th>
+                    <th class="theader">Update</th>
+                    <th class="theader">Start</th>
+                    <th class="theader">End</th>
+                    <th class="theader">Last Update</th>
+                    <th class="theader">Status</th>
+                    <th class="theader" >View</th>
+                    <th class="theader">Modify</th>
+                    <th class="theader">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="device : ${event}">
+                    <td th:text="${device.eventId}"></td>
+                    <td th:text="${device.serialNo}"></td>
+                    <td th:text="${device.merchantName}"></td>
+                    <td th:text="${device.eventDesc}"></td>
+                    <td th:text="${device.eventType}"></td>
+                    <td th:text="${device.executeType}"></td>
+                    <td th:text="${device.fromDate}"></td>
+                    <td th:text="${device.toDate}"></td>
+                    <td th:text="${device.lastUpdate}"></td>
+                    <td th:text="${device.status}"></td>
+
+                    <td align="center"><a
+                            th:href="@{/admin-portal/view-event/{serialNo}/{eventId}(serialNo=${device.serialNo},eventId=${device.eventId})}"
+                            class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+
+                    <td align="center"><span th:if="${device.status != 'DONE'}"><a
+                            th:href="@{/admin-portal/update-event/{serialNo}/{eventId}(serialNo=${device.serialNo},eventId=${device.eventId})}"
+                            class="btn btn-warning"><i class="fas fa-edit"></i></a> </span> <span
+                            th:if="${device.status == 'DONE'}"><a
+                            th:href="@{/admin-portal/modify-device/}"
+                            class="btn btn-primary disabled"><i class="fas fa-edit"></i></a>
+							</span></td>
+                    <td align="center"><span th:if="${device.status != 'DONE'}"><a
+                            th:href="'#model' + @{${device.eventId}}" class="trigger-btn btn btn-danger"
+                            data-toggle="modal"
+                    ><i
+                            class="fas fa-trash-alt"></i></a></span> <span
+                            th:if="${device.status == 'DONE'}"><a
+                            th:href="@{/admin-portal/delete-device/}"
+                            class="btn btn-danger disabled"><i class="fas fa-trash-alt"></i></a>
+							</span>
+                        <div th:id="'model' + @{${device.eventId}}" class="modal hide fade in" data-keyboard="false"
+                             data-backdrop="static">
+                            <div class="modal-dialog modal-delete">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="icon-box">
+                                            <i class="fa fa-question"></i>
+                                        </div>
+                                        <h4 class="modal-title w-100">Are you sure?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-center">Do you really want to delete this record? </p>
+                                    </div>
+                                    <div class="modal-footer align-center">
+
+                                        <a
+                                                th:href="@{/admin-portal/delete-event/{eventId}(eventId=${device.eventId})}"
+                                                class="btn btn-danger"
+                                        > Delete
+                                        </a>
+
+                                        <button class="btn btn-primary btn-inline" data-dismiss="modal">Cancel</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </td>
+
+                </tr>
+                <button
+                        type="button"
+                        class="btn btn-danger btn-floating btn-lg float-right btn-back-to-top"
+                        id="btn-back-to-top"
+                        onclick="backToTop()"
+                >
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="10" align="center"><span
+                            th:if="${event.isEmpty()}" th:text="${tableStatus}"></span></td>
+
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- 
+	Common Error Page
+	
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Error</title>
+</head>
+<body class="body-color">
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<!-- Modal HTML -->
+						<div id="modalFail" class="modal hide fade in show" data-keyboard="false" data-backdrop="static">
+							<div class="modal-dialog modal-confirm">
+								<div class="modal-content">
+									<div class="modal-header">
+										<div class="icon-box">
+											<i class="material-icons">&#10006;</i>
+										</div>				
+										<h4 class="modal-title w-100">Error</h4>	
+									</div>
+									<div class="modal-body">
+										<p class="text-center" th:text="${errorMessage}"></p>
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-success btn-block" onclick="goBack()">OK</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Modal HTML -->
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+
+</body>
+</html>

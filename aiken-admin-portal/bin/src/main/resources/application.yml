@@ -1,0 +1,50 @@
+server:
+  port: 2020
+  error:
+    include-message: always
+    include-binding-errors: always
+    
+  forward-headers-strategy: NATIVE
+ 
+spring:
+  application:
+    name: admin-portal
+    
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+   
+# Database Configs
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost/admin-portal
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: admin
+    pool-name: admin-portal
+    maximum-pool-size: 40
+    max-lifetime: 1200000
+    minimum-idle: 8
+    idle-timeout: 300000
+    
+springdoc:
+  api-docs.path: /api-docs
+    
+logging:
+  file:
+    name: C://Apps//Logs//admin-portal.log
+    path: C://Apps//Logs
+  level:
+    root: INFO
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:-%blue(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss}}) %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}(%line\)){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+    file: ${CONSOLE_LOG_PATTERN:-%blue(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss}}) %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}(%line\)){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+  
+  
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+      

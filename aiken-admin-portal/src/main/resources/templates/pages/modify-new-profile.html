@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<!--
+	@author Nandana Basnayake
+
+	@since 2021-11-18
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Modify Profile</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <h3 class="text-primary">Modify Profile</h3>
+        <br>
+        <form action="#" th:action="@{/admin-portal/modify-new-profile-add-to-cart}"
+              th:object="${profileForm}" method="post">
+
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <p>Please Correct Errors Below</p>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-primary">Profile Common Parameters</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label">Profile Name *</label>
+                                    <input id="profileName" type="text" th:field="*{profileName}" class="form-control"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('profileName')}">
+									<p th:errors="*{profileName}" class="text-danger">Profile Name Required</p>
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label">Merchant Name</label>
+                                    <input id="profileMerchantName" type="text" th:field="*{merchantName}"
+                                           class="form-control"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('merchantName')}">
+									<p th:errors="*{merchantName}" class="text-danger">Merchant Name Required</p>
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label">Merchant Address</label>
+                                    <input id="profileMerchantAddress" type="text" th:field="*{merchantAdrs}"
+                                           class="form-control"/>
+                                    <span class="help-block" th:if="${#fields.hasErrors('merchantAdrs')}">
+									<p th:errors="*{merchantAdrs}" class="text-danger">Merchant Address Required</p>
+								</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h5 class="text-primary">Visa</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="vContact" type="checkbox" th:field="*{visaCnt}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="vConless" type="checkbox" th:field="*{visaCntls}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="visaNoCvm" type="text" th:field="*{visaNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control"/>
+                                    </span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="visaTransLimit" type="text" th:field="*{visaCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">MasterCard</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="mcContact" type="checkbox" th:field="*{mcCnt}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="mcConless" type="checkbox" th:field="*{mcCntls}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input id="mcNoCvm" type="text" th:field="*{mcNoCvm}" placeholder="No CVM Limit "
+                                           class="form-control"/> <span class="help-block"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input id="mcTransLimit" type="text" th:field="*{mcCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">Amex</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="amexContact" type="checkbox" th:field="*{amexCnt}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="amexConless" type="checkbox" th:field="*{amexCntls}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="amexNoCvm" type="text" th:field="*{amexNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="amexTransLimit" type="text" th:field="*{amexCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">UnionPay</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="upayContact" type="checkbox" th:field="*{upayCnt}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="upayConless" type="checkbox" th:field="*{upayCntls}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="upayNoCvm" type="text" th:field="*{upayNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="upayTransLimit" type="text" th:field="*{upayCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">Jcb</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="jcbContact" type="checkbox" th:field="*{jcbCnt}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="jcbConless" type="checkbox" th:field="*{jcbCntls}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="jcbNoCvm" type="text" th:field="*{jcbNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="jcbTransLimit" type="text" th:field="*{jcbCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control"/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h4 class="text-primary">Customer Receipt & TLS Enable/Disable</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="customerCopy" type="checkbox" th:field="*{customerCopy}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Customer Receipt</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="tlsEnable" type="checkbox" th:field="*{tlsEnable}"
+                                               class="checkbox-format input-group-addon"/>
+                                        <span class="input-group-addon btnn">Enable TLS</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--PROFILE MERCHANT-->
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-primary">Profile Merchant</h4>
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="panel panel-default">
+                                <!-- /.panel-heading -->
+
+                                <h5 class="text-secondary align-center div-pd-10">Link Merchants with the Profile</h5>
+                                <div class="panel-body">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active nav-link" th:if="${diffSale}"><a href="#default-sale-pills"
+                                                                                           data-toggle="tab">Default
+                                            Sale</a>
+                                        </li>
+                                        <li class=" nav-link" th:if="${diffSale}"><a href="#visa-sale-pills"
+                                                                                     data-toggle="tab">VISA Only </a>
+                                        </li>
+                                        <li class=" nav-link" th:if="${diffSale}"><a href="#master-sale-pills"
+                                                                                     data-toggle="tab">Master Only </a>
+                                        </li>
+                                        <li class=" nav-link" th:if="${diffSale}"><a href="#jcb-sale-pills"
+                                                                                     data-toggle="tab">CUP/JCB Only </a>
+                                        </li>
+                                        <li class="active nav-link" th:if="${!diffSale}"><a href="#sale-pills"
+                                                                                            data-toggle="tab">Sale</a>
+                                        <li class="nav-link"><a href="#epp-pills" data-toggle="tab">EPP</a>
+                                        </li>
+                                        <li class="nav-link"><a href="#qr-pills" data-toggle="tab">QR</a>
+                                        </li>
+                                        <li class="nav-link"><a href="#amex-pills" data-toggle="tab">AMEX</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane in active card" id="default-sale-pills"
+                                             th:if="${diffSale}">
+                                            <h6 class="text-secondary div-pd-10">Select Default SALE Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='SALE' and (merchant.merchantType=='DEFAULT_SALE' or merchant.merchantType=='SALE' or merchant.merchantType==null)}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="9" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">Default SALE Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane in card" id="visa-sale-pills">
+                                            <h6 class="text-secondary div-pd-10">Select VISA Only SALE Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='SALE' and merchant.merchantType=='SALE_VISA_ONLY'}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='SALE'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="9" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">VISA SALE Only Merchants</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane in card" id="master-sale-pills">
+                                            <h6 class="text-secondary div-pd-10">Select MASTER Only SALE Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='SALE' and merchant.merchantType=='SALE_MASTER_ONLY'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="9" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">Master Only Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane in card" id="jcb-sale-pills">
+                                            <h6 class="text-secondary div-pd-10">Select JCB/CUP & Other SALE
+                                                Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='SALE' and merchant.merchantType=='SALE_JCB_CUP'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="9" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">JCB/CUP Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+
+                                        <div class="tab-pane in active card" id="sale-pills" th:if="${!diffSale}">
+                                            <h6 class="text-secondary div-pd-10">Select SALE Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='SALE'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="9" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">SALE Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade card" id="epp-pills">
+                                            <h6 class="text-secondary div-pd-10">Select EPP Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='EPP'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="7" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">EPP Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade card" id="qr-pills">
+                                            <h6 class="text-secondary div-pd-10">Select QR Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='QR'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="7" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">QR Merchants Not Configured</span>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade card" id="amex-pills">
+                                            <h6 class="text-secondary div-pd-10">Select AMEX Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${profileForm.merchants!=null and !profileForm.merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+                                                    <th class="theader">Add to Profile</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${profileForm.merchants}"
+                                                    th:if="${merchant.type=='AMEX'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-center">
+                                                        <a th:href="@{/admin-portal/modify-new-profile-merchant/{merchantId}/{profileId}(merchantId=${merchant.merchantId},profileId=${profileForm.profileId})}"
+                                                           class="btn btn-primary" id="configProfileMerchant"
+                                                           onClick="configProfMerchant()">Configure</a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="7" align="center"><span
+                                                            th:if="${profileForm.merchants==null or profileForm.merchants.empty}">AMEX Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p></p>
+            <div class="row">
+                <div class="col-md-12 align-right">
+                    <div>
+                        <input type="submit" id="addProfToCart" class="btn btn-info icon-shopping-cart icon-large"
+                               value="Modify Profile"/>
+                        <a href="#" class="btn btn-secondary" onClick="goBack();"><i> Back</i></a>
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{profileId}" id="profileId">
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

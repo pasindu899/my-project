@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>View Reports</title>
+    <style>
+        /* Style for the view report button */
+        .report-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+        }
+
+        /* Positioning for the button container */
+        .button-container {
+            margin-top: 10px;
+            text-align: right;
+        }
+    </style>
+    <script>
+    </script>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        <form id="reportForm" th:action="@{/admin-portal/view-reports/banks/saleMIDTID}" th:object="${formData}" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-primary" title="Generate  reports for default Sale MID/TIDs">Generate  reports for default Sale MID/TIDs</h5>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="bankName" class="col-form-label">Bank *</label>
+                            <select id="bankName" th:field="*{bankName}" class="form-control">
+                                <option th:value="'BOC'" th:text="BOC"></option>
+                                <option th:value="'COM_BANK'" th:text="COM_BANK"></option>
+                                <option th:value="'DFCC'" th:text="DFCC"></option>
+                                <option th:value="'HNB'" th:text="HNB"></option>
+                                <option th:value="'NDB'" th:text="NDB"></option>
+                                <option th:value="'PEOPLES'" th:text="PEOPLES"></option>
+                                <option th:value="'SAMPATH'" th:text="SAMPATH"></option>
+                                <option th:value="'SEYLAN'" th:text="SEYLAN"></option>
+                                <option th:value="'SDB'" th:text="SDB"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Button container for View Report button -->
+                    <div class="button-container">
+                        <button id="viewReportButton" class="report-button" type="submit">View Report</button>
+                    </div>
+                    <!-- End of button container -->
+                </div>
+            </div>
+        </form>
+        <form id="reportForm1" th:action="@{/admin-portal/view-reports/banks/amexMIDTID}" th:object="${formData}" method="post">
+            <!-- Second Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-primary" title="Generate reports for AMEX MID/TIDs">Generate reports for AMEX MID/TIDs</h5>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="bankName" class="col-form-label">Bank *</label>
+                            <select id="bankName1" th:field="*{bankName}" class="form-control">
+                                <option th:value="'BOC'" th:text="BOC"></option>
+                                <option th:value="'COM_BANK'" th:text="COM_BANK"></option>
+                                <option th:value="'DFCC'" th:text="DFCC"></option>
+                                <option th:value="'HNB'" th:text="HNB"></option>
+                                <option th:value="'NDB'" th:text="NDB"></option>
+                                <option th:value="'PEOPLES'" th:text="PEOPLES"></option>
+                                <option th:value="'SAMPATH'" th:text="SAMPATH"></option>
+                                <option th:value="'SEYLAN'" th:text="SEYLAN"></option>
+                                <option th:value="'SDB'" th:text="SDB"></option>
+                                <option th:value="'ALL'" th:text="ALL"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Button container for View Report button -->
+                    <div class="button-container">
+                        <button id="viewReportButton2" class="report-button" type="submit">View Report</button>
+                    </div>
+                    <!-- End of button container -->
+                </div>
+            </div>
+            <!-- End of Second Card -->
+        </form>
+
+        <form id="reportForm4" th:action="@{/admin-portal/view-reports/banks/allMIDTID}" th:object="${formData}" method="post">
+            <!-- Second Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-primary" title="Generate  reports for all MID/TIDs">Generate  reports for all MID/TIDs</h5>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="bankName" class="col-form-label">Bank *</label>
+                            <select id="bankName4" th:field="*{bankName}" class="form-control">
+                                <option th:value="'BOC'" th:text="BOC"></option>
+                                <option th:value="'COM_BANK'" th:text="COM_BANK"></option>
+                                <option th:value="'DFCC'" th:text="DFCC"></option>
+                                <option th:value="'HNB'" th:text="HNB"></option>
+                                <option th:value="'NDB'" th:text="NDB"></option>
+                                <option th:value="'PEOPLES'" th:text="PEOPLES"></option>
+                                <option th:value="'SAMPATH'" th:text="SAMPATH"></option>
+                                <option th:value="'SEYLAN'" th:text="SEYLAN"></option>
+                                <option th:value="'SDB'" th:text="SDB"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Button container for View Report button -->
+                    <div class="button-container">
+                        <button id="viewReportButton4" class="report-button" type="submit">View Report</button>
+                    </div>
+                    <!-- End of button container -->
+                </div>
+            </div>
+            <!-- End of Second Card -->
+        </form>
+
+
+        <!-- Third Card -->
+        <form id="reportForm2" th:action="@{/admin-portal/view-reports/banks/devices}" th:object="${formData}" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-primary" title="Generate reports for Merchant Portal Connected devices">Generate reports for Merchant Portal Connected devices</h5>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="bankName" class="col-form-label">HNB Devices *</label>
+                            <select id="bankName2" th:field="*{bankName}" class="form-control">
+                                <option value="N700_Devices">N700_Devices</option>
+                                <option value="N910_Devices">N910_Devices</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Button container for View Report button -->
+                    <div class="button-container">
+                        <button id="viewReportButton3" class="report-button" type="submit">View Report</button>
+                    </div>
+                    <!-- End of button container -->
+                </div>
+            </div>
+        </form>
+
+        <form id="reportForm5" th:action="@{/admin-portal/view-reports/banks/comParams}" th:object="${formData}" method="post">
+            <!-- Second Card -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-primary" title="Communication Params of the device">Communication Params of the device</h5>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="bankName" class="col-form-label">Bank *</label>
+                            <select id="bankName5" th:field="*{bankName}" class="form-control">
+                                <option th:value="'BOC'" th:text="BOC"></option>
+                                <option th:value="'COM_BANK'" th:text="COM_BANK"></option>
+                                <option th:value="'DFCC'" th:text="DFCC"></option>
+                                <option th:value="'HNB'" th:text="HNB"></option>
+                                <option th:value="'NDB'" th:text="NDB"></option>
+                                <option th:value="'PEOPLES'" th:text="PEOPLES"></option>
+                                <option th:value="'SAMPATH'" th:text="SAMPATH"></option>
+                                <option th:value="'SEYLAN'" th:text="SEYLAN"></option>
+                                <option th:value="'SDB'" th:text="SDB"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Button container for View Report button -->
+                    <div class="button-container">
+                        <button id="viewReportButton5" class="report-button" type="submit">View Report</button>
+                    </div>
+                    <!-- End of button container -->
+                </div>
+            </div>
+            <!-- End of Second Card -->
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

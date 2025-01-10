@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-10-14 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Modify Profile Configuration</title>
+
+
+
+<style>
+
+</style>
+<script type="text/javascript">
+</script>
+
+</head>
+<body class="body-color">
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="modalSuccess" class="modal hide fade in show" data-keyboard="false" data-backdrop="static">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h4 class="modal-title w-100">Configure Merchant With Profile</h4>	
+							      </div>
+							      <div class="modal-body">
+							        <div>
+							            <form action="#" th:action="@{/admin-portal/modify-merchant-to-profile-cart}" th:object="${merchantForm}"
+							            	method="post"> 
+							                
+							                <div class="card">
+							                    <div class="card-body">
+							                       
+							
+							                        <div class="row">
+							                        	<div hidden>
+							                                <input id="merchantId" type="text"
+							                                       th:field="*{merchantId}" class="hidden"/>
+							                            </div>
+							                        	
+							                        	<div class="form-group input-group">
+							                                <span class="input-group-addon addon-text-w-150">Category</span>
+							                                <input id="type" type="text" th:field="*{type}" class="form-control" readonly/>
+							                            </div>
+							                        	<div class="form-group input-group">
+							                                <span class="input-group-addon addon-text-w-150">MID</span>
+							                                <input id="mid" type="text" th:field="*{mid}" class="form-control" readonly/>
+							                            </div>
+							                            <div class="form-group input-group">
+							                                <span class="input-group-addon addon-text-w-150">TID</span>
+							                                <input id="tid" type="text" th:field="*{tid}" class="form-control" readonly/>
+							                            </div>
+							                            <div class="form-group input-group">
+							                                <span class="input-group-addon addon-text-w-150">Description</span>
+							                                <input id="description" type="text" th:field="*{description}" class="form-control" readonly/>
+							                            </div>
+							                           
+							                        </div>
+							                        <div class="row">
+							                        		
+							                        	<div class="col-md-6">
+																<label for="defaultMerchant" class="btn btn-info btnn">Set As Default<input id="defaultMerchant" type="checkbox"
+																			   th:field="*{defaultMerchant}"  class="form-control" th:disabled="${merchantForm.type eq 'QR' or merchantForm.type eq 'EPP'}"/></label>
+																	
+														</div>
+													      <div class="col-md-6">
+																<label for="selectMerchant" class="btn btn-info btnn">Add to Profile<input id="selectMerchant" type="checkbox"
+																			    class="form-control" th:field="*{selectMerchant}"/></label>
+	                     
+															</div>
+													      
+							                    	</div>
+							                     <input type="hidden" th:field="*{profileId}" id="profileId">
+												
+							                </div>
+							                
+							                </div>
+							                <div class="modal-footer">
+											        <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="goBack()">Close</button>
+											        <button type="submit" class="btn btn-primary">Add</button>
+											</div>
+							            </form>
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
+						</div>          		                
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</div>
+
+	<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+
+</body>
+</html>

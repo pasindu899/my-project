@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Merchant Information</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<div class="col-md-12">
+			<h3 class="text-center">Merchant Details</h3>
+			<form action="#" th:action="@{/admin-portal/current-modify-to-cart}"
+				th:object="${merchantForm}" method="post">
+
+				<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+					<p>Something went wrong. Please try again </p>
+				</div>
+
+				<div class="card">
+					<div class="card-body">
+						<h5 class="text-primary">Merchant Common Parameters</h5>
+						
+						<div class="row">
+							<div class="form-group col-md-3">
+							
+								<label for="month" class="col-form-label">Merchant</label> <input
+									id="month" type="text" th:field="*{type}" class="form-control" th:disabled="true" />
+							
+							</div>
+							<div class="form-group col-md-3">
+								<label for="month" class="col-form-label">Months</label> <input
+									id="month" type="text" th:field="*{month}" class="form-control" th:disabled="true" />
+								<span class="help-block"
+									th:if="${#fields.hasErrors('month')}">
+									<p th:errors="*{month}" class="text-danger">Invalid Month
+										Amount</p>
+								</span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="month" class="col-form-label">Currency</label> <input
+									id="month" type="text" th:field="*{currency}" class="form-control" th:disabled="true" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="description" class="col-form-label">Description
+									*</label> <input id="description" type="text" th:field="*{description}"
+									class="form-control" th:disabled="true" /><span class="help-block"
+									th:if="${#fields.hasErrors('description')}">
+									<p th:errors="*{description}" class="text-danger">Invalid
+										Description</p>
+								</span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label for="minAmount" class="col-form-label">MIN Amount
+								</label> <input id="minAmount" type="text" th:field="*{minAmount}"
+									class="form-control" th:disabled="true"/> <span class="help-block"
+									th:if="${#fields.hasErrors('minAmount')}">
+									<p th:errors="*{minAmount}" class="text-danger">Invalid MIN
+										Amount</p>
+								</span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="maxAmount" class="col-form-label">MAX Amount
+								</label> <input id="maxAmount" type="text" th:field="*{maxAmount}"
+									class="form-control" th:disabled="true"/> <span class="help-block"
+									th:if="${#fields.hasErrors('maxAmount')}">
+									<p th:errors="*{maxAmount}" class="text-danger">Invalid MAX
+										Amount</p>
+								</span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="mid" class="col-form-label">MID *</label> <input
+									id="mid" type="text" th:field="*{mid}" class="form-control" th:disabled="true"/>
+								<span class="help-block" th:if="${#fields.hasErrors('mid')}">
+									<p th:errors="*{mid}" class="text-danger">Invalid MID</p>
+								</span>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="tid" class="col-form-label">TID *</label> <input
+									id="tid" type="text" th:field="*{tid}" class="form-control" th:disabled="true"/>
+								<span class="help-block" th:if="${#fields.hasErrors('tid')}">
+									<p th:errors="*{tid}" class="text-danger">Invalid TID</p>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p></p>
+
+				<div class="card" th:if="${merchantForm.type == 'QR'}">
+					<div class="card-body" th:visible="false">
+						<h5 class="text-primary">QR Merchant Parameters</h5>
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label for="merchantUserId" class="col-form-label">Merchant
+									User Id </label> <input id="merchantUserId" type="text"
+									th:field="*{merchantUserId}" class="form-control" th:disabled="true"/>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="merchantPassword" class="col-form-label">Merchant
+									Password </label> <input id="merchantPassword" type="text"
+									th:field="*{merchantPassword}" class="form-control" th:disabled="true"/>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="checksumKey" class="col-form-label">Checksum
+									Key </label> <input id="checksumKey" type="text"
+									th:field="*{checksumKey}" class="form-control" th:disabled="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p></p>
+
+				<div class="card" th:if="${merchantForm.type == 'AMEX'}">
+					<div class="card-body">
+						<h5 class="text-primary">AMEX Merchant Parameters</h5>
+						<div class="row">
+							<div class=" col-md-1">
+								<input id="amexTx" type="checkbox" th:field="*{amexTx}"
+									class="form-control" th:disabled="true"/>
+							</div>
+							<div class=" col-md-3">
+								<label for="amexTx" class="col-form-label">AMEX
+									Enable/Disable</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label for="amexIp" class="col-form-label">IP</label> <input
+									id="amexIp" type="text" th:field="*{amexIp}"
+									class="form-control" th:disabled="true"/>
+							</div>
+							<div class="form-group col-md-3">
+								<label for="amexPort" class="col-form-label">PORT</label> <input
+									id="amexPort" type="text" th:field="*{amexPort}"
+									class="form-control" th:disabled="true"/>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="amexTpdu" class="col-form-label">TPDU</label> <input
+									id="amexTpdu" type="text" th:field="*{amexTpdu}"
+									class="form-control" th:disabled="true"/>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="amexNii" class="col-form-label">NII</label> <input
+									id="amexNii" type="text" th:field="*{amexNii}"
+									class="form-control" th:disabled="true"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p></p>
+				
+				<div class="row">
+					<div class="col-md-6">
+						
+							<a th:href="@{/admin-portal/push-device/{serialNo}(serialNo=${deviceSerial})}"
+								
+								class="btn btn-primary">Back</a>
+					</div>
+					<input type="hidden" th:field="*{merchantId}" id="merchantId">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+
+</body>
+</html>

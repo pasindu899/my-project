@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Add New Merchant</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <h3 class="text-primary">Register Device - Merchant Configuration</h3>
+        <br>
+        <form action="#" th:action="@{/admin-portal/new-add-to-cart}"
+              th:object="${merchantForm}" method="post" id="merConfig">
+
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <p>Please Correct Errors Below</p>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="text-primary">Merchant Common Parameters</h5>
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label for="type" class="col-form-label">Category *</label> <select id="type"
+                                                                                                th:field="*{type}"
+                                                                                                class="form-control">
+                            <option th:each="merchantType : ${merchantTypes}"
+                                    th:value="${merchantType.code}" th:text="${merchantType.name}"/>
+                        </select>
+                        </div>
+                        <div class="form-group col-md-2" id="div_merchantType">
+                            <label for="type" class="col-form-label">Type (For Sale Category only)</label> <select
+                                id="merchantType" th:field="*{merchantType}"
+                                class="form-control">
+                            <option th:each="saleMerchType : ${saleMerchantTypes}"
+                                    th:value="${saleMerchType.code}" th:text="${saleMerchType.name}"/>
+                        </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="month" class="col-form-label">Months</label> <input
+                                id="month" type="text" th:field="*{month}" class="form-control"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('month')}">
+									<p th:errors="*{month}" class="text-danger">Invalid Month
+										Amount</p>
+								</span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="currency" class="col-form-label">Currency *</label>
+                            <select id="currency" th:field="*{currency}"
+                                    class="form-control">
+                                <option th:each="currency : ${currencies}"
+                                        th:value="${currency}" th:text="${currency}"/>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="description" class="col-form-label">Description
+                                *</label> <input id="description" type="text" th:field="*{description}"
+                                                 class="form-control"/><span class="help-block"
+                                                                             th:if="${#fields.hasErrors('description')}">
+									<p th:errors="*{description}" class="text-danger">Invalid Description</p>
+								</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label for="minAmount" class="col-form-label">MIN Amount
+                            </label> <input id="minAmount" type="text" th:field="*{minAmount}"
+                                            class="form-control"/> <span class="help-block"
+                                                                         th:if="${#fields.hasErrors('minAmount')}">
+									<p th:errors="*{minAmount}" class="text-danger">Invalid MIN
+										Amount</p>
+								</span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="maxAmount" class="col-form-label">MAX Amount
+                            </label> <input id="maxAmount" type="text" th:field="*{maxAmount}"
+                                            class="form-control"/> <span class="help-block"
+                                                                         th:if="${#fields.hasErrors('maxAmount')}">
+									<p th:errors="*{maxAmount}" class="text-danger">Invalid MAX
+										Amount</p>
+								</span>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label for="mid" class="col-form-label">MID *</label>
+                            <div class="form-group input-group">
+                                <input id="mid" type="text" th:field="*{mid}" class="form-control">
+                                <span class="input-group-addon" id=midLength>0</span>
+                            </div>
+
+                            <span class="help-block" th:if="${#fields.hasErrors('mid')}">
+									<p th:errors="*{mid}" class="text-danger">Invalid MID</p>
+								</span>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label for="tid" class="col-form-label">TID *</label>
+
+                            <div class="form-group input-group">
+                                <input id="tid" type="text" th:field="*{tid}" class="form-control">
+                                <span class="input-group-addon" id=tidLength>0</span>
+                            </div>
+                            <span class="help-block" th:if="${#fields.hasErrors('tid')}">
+									<p th:errors="*{tid}" class="text-danger">Invalid TID</p>
+								</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-group input-group ">
+                                <input id="preAuth" type="checkbox" th:field="*{preAuth}"
+                                       class="checkbox-format input-group-addon"/>
+                                <span class="input-group-addon btnn">Enable Pre Auth</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group input-group ">
+                                <input id="dcc" type="checkbox" th:field="*{dcc}"
+                                       class="checkbox-format input-group-addon"/>
+                                <span class="input-group-addon btnn">Enable DCC</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group input-group ">
+                                <input id="offline" type="checkbox" th:field="*{offline}"
+                                       class="checkbox-format input-group-addon"/>
+                                <span class="input-group-addon btnn">Enable Offline</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group input-group ">
+                                <input id="jcb" type="checkbox" th:field="*{jcb}"
+                                       class="checkbox-format input-group-addon"/>
+                                <span class="input-group-addon btnn">Enable JCB</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2" id="iphoneImeiScan">
+                            <div class="form-group  input-group ">
+                                <input id="iphoneImei" type="checkbox" th:field="*{iphoneImei}"
+                                       class="checkbox-format input-group-addon"/>
+                                <span class="input-group-addon btnn">iPhone IMEI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row" id="divMidTidSeg">
+                    <div class="card col-lg-12">
+                        <h5 class="text-primary">Applicable only for Different MID/TID (LKR Merchants) versions </h5>
+                        <div class="card col-lg-12">
+                            <div class="row">
+                                <div class="col-md-6" id="cardtype">
+                                    <h6 class="text-primary">Card Type(Click Foreign only if DCC or non-DCC)</h6>
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group input-group ">
+                                                        <input id="localMer" type="checkbox" th:field="*{localMer}"
+                                                               class="checkbox-format input-group-addon"/>
+                                                        <span class="input-group-addon btnn-w200">Local</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group input-group ">
+                                                        <input id="foreignMer" type="checkbox" th:field="*{foreignMer}"
+                                                               class="checkbox-format input-group-addon"/>
+                                                        <span class="input-group-addon btnn-w200">Foreign</span>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="cardissuer">
+                                    <h6 class="text-primary">Card Issuer</h6>
+                                    <div class="card">
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group input-group ">
+                                                        <input id="onus" type="checkbox" th:field="*{onUs}"
+                                                               class="checkbox-format input-group-addon"/>
+                                                        <span class="input-group-addon btnn-w200">ON-US (Same Bank)</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group input-group ">
+                                                        <input id="offus" type="checkbox" th:field="*{offUs}"
+                                                               class="checkbox-format input-group-addon"/>
+                                                        <span class="input-group-addon btnn-w200">OFF-US (Other Bank)</span>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--				</div>-->
+                <!--				<p></p>-->
+                <!--				&lt;!&ndash; Different MID TID Settings &ndash;&gt;-->
+                <!--				<div class="card"   id="div-lkr">-->
+                <!--					<div class="card-body">-->
+                <!--						<h5 class="text-primary">Different MID TID Settings</h5>-->
+                <!--						<div class="row">-->
+
+                <!--							<div class="col-md-2">-->
+                <!--								<div class="form-group input-group ">-->
+                <!--									<input id="foreign" type="checkbox" th:field="*{foreign}"-->
+                <!--										   class="checkbox-format input-group-addon" />-->
+                <!--									<span class="input-group-addon btnn">Enable Foreign</span>-->
+                <!--								</div>-->
+                <!--							</div>-->
+                <!--							<div class="col-md-2">-->
+                <!--								<div class="form-group input-group ">-->
+                <!--									<input id="local" type="checkbox" th:field="*{local}"-->
+                <!--										   class="checkbox-format input-group-addon" />-->
+                <!--									<span class="input-group-addon btnn">Enable Local</span>-->
+                <!--								</div>-->
+                <!--							</div>-->
+                <!--							<div class="col-md-2">-->
+                <!--								<div class="form-group input-group"  id="onUs_but">-->
+                <!--									<input id="onUs" type="checkbox" th:field="*{onUs}"-->
+                <!--										   class="checkbox-format input-group-addon" />-->
+                <!--									<span class="input-group-addon btnn">ON US(Same Bank) </span>-->
+                <!--								</div>-->
+                <!--							</div>-->
+                <!--							<div class="col-md-2">-->
+                <!--								<div class="form-group input-group " id="offUs_but">-->
+                <!--									<input id="offUs" type="checkbox" th:field="*{offUs}"-->
+                <!--										   class="checkbox-format input-group-addon" />-->
+                <!--									<span class="input-group-addon btnn">OFF US(Other Bank)</span>-->
+                <!--								</div>-->
+                <!--							</div>-->
+
+                <!--						</div>-->
+
+                <!--						</div>-->
+                <!--				</div>-->
+
+                <!--				<p></p>-->
+
+
+                <div class="card display-off" id="div-qr">
+                    <div class="card-body">
+                        <h5 class="text-primary">QR Merchant Parameters</h5>
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <label for="merchantUserId" class="col-form-label">Merchant
+                                    User Id *</label> <input id="merchantUserId" type="text"
+                                                             th:field="*{merchantUserId}" class="form-control"/>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="merchantPassword" class="col-form-label">Merchant
+                                    Password *</label> <input id="merchantPassword" type="text"
+                                                              th:field="*{merchantPassword}" class="form-control"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="checksumKey" class="col-form-label">Checksum
+                                    Key *</label> <input id="checksumKey" type="text"
+                                                         th:field="*{checksumKey}" class="form-control"/>
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="qrRefid" class="col-form-label">QR ReferenceID Enable/Disable</label>
+                                <input id="qrRefid" type="checkbox" th:field="*{qrRefId}"
+                                       class="checkbox-format input-group-addon"/>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <p></p>
+                <!-- <div class="card display-on" id="div-qr">
+                    <div class="card-body">
+                        <h5 class="text-primary">SOLO Parameters(HNB Only)</h5>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="vid" class="col-form-label">VID *</label> <input id="vid" type="text"
+                                    th:field="*{vid}" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="cid" class="col-form-label">CID *</label> <input id="cid" type="text"
+                                    th:field="*{cid}" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="card display-off" id="div-solo">
+                    <div class="card-body">
+                        <h5 class="text-primary">SOLO Parameters(HNB Only)</h5>
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="vid" class="col-form-label">VID *</label> <input id="vid" type="text"
+                                                                                             th:field="*{vid}"
+                                                                                             class="form-control"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="cid" class="col-form-label">CID *</label> <input id="cid" type="text"
+                                                                                             th:field="*{cid}"
+                                                                                             class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <!-- <div class="card display-off" id="div-amex">
+                    <div class="card-body">
+                        <h5 class="text-primary">AMEX Merchant Parameters</h5>
+                        <div class="row">
+                            <div class=" col-md-1">
+                                <input id="amexTx" type="checkbox" th:field="*{amexTx}"
+                                    class="form-control" /><span class="help-block"
+                                    th:if="${#fields.hasErrors('amexTx')}">
+                                    <p th:errors="*{amexTx}" class="text-danger">Disable Amex
+                                        </p>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-1">
+                             <input id="amexTx" type="checkbox" th:field="*{amexTx}"
+                                    class="form-control" /><span class="help-block"
+                                    th:if="${#fields.hasErrors('amexTx')}" >
+                                    <p th:errors="*{amexTx}" class="text-danger">Invalid
+                                        Description</p>
+                                </span>
+                            </div>
+                            <div class=" col-md-3">
+                                <label for="amexTx" class="col-form-label">AMEX
+                                    Enable</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="amexIp" class="col-form-label">IP Address *</label> <input
+                                    id="amexIp" type="text" th:field="*{amexIp}" th:readonly="true"
+                                    class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="card" id="div-binblock">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <h5 class="text-primary">BIN Configuration</h5>
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <button type="submit" class="btn btn-info icon-shopping-cart icon-large" name="action"
+                                        value="copy">Copy Rule
+                                </button>
+                                <!--<a th:href="@{/admin-portal/copy_bin_rule_to_current_cart}"
+                                   class="btn btn-secondary" id=btn_copy_rule><i class="fas fa-plus" onClick="goBack()"></i>Copy Rule</a>-->
+                            </div>
+                            <div class="form-group col-md-1">
+                                <button type="submit" class="btn btn-secondary icon-shopping-cart icon-large"
+                                        name="action" value="import">Import Rule
+                                </button>
+                                <!--<a th:href="@{/admin-portal/copy_bin_rule_to_current_cart}"
+                                   class="btn btn-secondary" id=btn_copy_rule><i class="fas fa-plus" onClick="goBack()"></i>Copy Rule</a>-->
+                            </div>
+                            <div class="form-group col-md-1 align-right">
+                                <a th:href="@{/admin-portal/new-bin-rule}"
+                                   class="btn btn-success" id=btn_new_rule><i class="fas fa-plus"
+                                                                              onClick="goBack()"></i> New Rule</a>
+                            </div>
+
+                        </div>
+
+                        <p></p>
+
+                        <div class="card" id="div-binblocknewruleTable">
+                            <div class="col-md-12">
+                                <table class="table table-striped table-responsive-md" th:if="${binrules.size()>0}">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Card Type</th>
+                                        <th>Trxn Type</th>
+                                        <th>Action</th>
+                                        <th>Type</th>
+                                        <th>BIN Start</th>
+                                        <th>BIN End</th>
+                                        <th>MID</th>
+                                        <th>TID</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    <tbody>
+                                    <tr th:each="binrule : ${binrules}" th:if="${binrule.tid==merchantForm.tid}">
+                                        <td th:text="${binrule.formId}"></td>
+                                        <td th:text="${binrule.cardType}"></td>
+                                        <td th:text="${binrule.transType}"></td>
+                                        <td th:text="${binrule.action}"></td>
+                                        <td th:text="${binrule.type}"></td>
+                                        <td th:text="${binrule.binStartFrom}"></td>
+                                        <td th:text="${binrule.binEndFrom}"></td>
+                                        <td th:text="${binrule.mid}"></td>
+                                        <td th:text="${merchantForm.tid}"></td>
+
+                                        <td>
+
+                                            <a th:href="'#model' + @{${binrule.formId}}"
+                                               class="trigger-btn btn btn-danger" data-toggle="modal"><i
+                                                    class="fas fa-trash-alt"></i></a>
+                                            <div th:id="'model' + @{${binrule.formId}}" class="modal hide fade in"
+                                                 data-keyboard="false" data-backdrop="dynamic">
+                                                <div class="modal-dialog modal-delete">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <div class="icon-box">
+                                                                <i class="fa fa-question"></i>
+                                                            </div>
+                                                            <h4 class="modal-title w-100">Are you sure?</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="text-center"
+                                                               th:text="'Do you really want to delete this rule?'"></p>
+                                                        </div>
+                                                        <div class="modal-footer align-center">
+
+                                                            <a
+                                                                    th:href="@{/admin-portal/delete-new-bin-rule/{ruleId}(ruleId=${binrule.formId})}"
+                                                                    class="btn btn-danger"
+                                                            > Delete
+                                                            </a>
+
+                                                            <button class="btn btn-primary btn-inline"
+                                                                    data-dismiss="modal">Cancel
+                                                            </button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                <p></p>
+
+                <div class="row">
+                    <div class="col-md-12 align-right">
+                        <div>
+                            <!--<input type="submit" id="addToCart"
+                                class="btn btn-info icon-shopping-cart icon-large"
+                                value="Add to Cart" />-->
+                            <button type="submit" class="btn btn-info icon-shopping-cart icon-large" name="action"
+                                    value="update"
+                                    id="addToCart">Add to Cart
+                            </button>
+                            <a
+                                    th:href="@{/admin-portal/register-device}"
+                                    class="btn btn-secondary"><i> Back</i></a>
+                        </div>
+                    </div>
+                    <input type="hidden" th:field="*{merchantId}" id="merchantId">
+
+                </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<!--
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-10-20
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>View Profile</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <h3 class="text-primary">View Profile</h3>
+        <br>
+        <form action="#" th:action="@{/admin-portal/new-profile-add-to-cart}"
+              th:object="${profileForm}" method="post">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-primary">Profile Common Parameters</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label">Profile Name *</label>
+                                    <input id="profileName" type="text" th:field="*{profileName}" class="form-control"
+                                           th:disabled=true/>
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label">Merchant Name</label>
+                                    <input id="profileMerchantName" type="text" th:field="*{merchantName}"
+                                           class="form-control" th:disabled=true/>
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="col-form-label">Merchant Address</label>
+                                    <input id="profileMerchantAddress" type="text" th:field="*{merchantAdrs}"
+                                           class="form-control" th:disabled=true/>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h5 class="text-primary">Visa</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="vContact" type="checkbox" th:field="*{visaCnt}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="vConless" type="checkbox" th:field="*{visaCntls}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="visaNoCvm" type="text" th:field="*{visaNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control" th:disabled=true/>
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="visaTransLimit" type="text" th:field="*{visaCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control" th:disabled=true/>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">MasterCard</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="mcContact" type="checkbox" th:field="*{mcCnt}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="mcConless" type="checkbox" th:field="*{mcCntls}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="mcNoCvm" type="text" th:field="*{mcNoCvm}" placeholder="No CVM Limit "
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="mcTransLimit" type="text" th:field="*{mcCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">Amex</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="amexContact" type="checkbox" th:field="*{amexCnt}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="amexConless" type="checkbox" th:field="*{amexCntls}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="amexNoCvm" type="text" th:field="*{amexNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="amexTransLimit" type="text" th:field="*{amexCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">UnionPay</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="upayContact" type="checkbox" th:field="*{upayCnt}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="upayConless" type="checkbox" th:field="*{upayCntls}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="upayNoCvm" type="text" th:field="*{upayNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="upayTransLimit" type="text" th:field="*{upayCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <h4 class="text-primary">Jcb</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="jcbContact" type="checkbox" th:field="*{jcbCnt}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contact</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="jcbConless" type="checkbox" th:field="*{jcbCntls}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Contactless</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="jcbNoCvm" type="text" th:field="*{jcbNoCvm}" placeholder="No CVM Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <input id="jcbTransLimit" type="text" th:field="*{jcbCntslTrxn}"
+                                           placeholder="Contactless Transaction Limit"
+                                           class="form-control" th:disabled=true/> <span class="help-block">
+								</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h4 class="text-primary">Customer Receipt & TLS Enable/Disable</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="customerCopy" type="checkbox" th:field="*{customerCopy}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Customer Receipt</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group input-group ">
+                                        <input id="tlsEnable" type="checkbox" th:field="*{tlsEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                        <span class="input-group-addon btnn">Enable TLS</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--PROFILE MERCHANT-->
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-primary">Profile Merchant</h4>
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="panel panel-default">
+                                <!-- /.panel-heading -->
+
+                                <h5 class="text-secondary align-center div-pd-10">Link Merchants with the Profile</h5>
+                                <div class="panel-body">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active nav-link"><a href="#sale-pills" data-toggle="tab">Sale</a>
+                                        </li>
+                                        <li class="nav-link"><a href="#epp-pills" data-toggle="tab">EPP</a>
+                                        </li>
+                                        <li class="nav-link"><a href="#qr-pills" data-toggle="tab">QR</a>
+                                        </li>
+                                        <li class="nav-link"><a href="#amex-pills" data-toggle="tab">AMEX</a>
+                                        </li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane in active card" id="sale-pills">
+                                            <h6 class="text-secondary div-pd-10">Select SALE Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${merchants!=null and !merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>DCC</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${merchants}" th:if="${merchant.type=='SALE'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.dcc}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="8" align="center"><span
+                                                            th:if="${merchants==null or merchants.empty}">SALE Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade card" id="epp-pills">
+                                            <h6 class="text-secondary div-pd-10">Select EPP Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${merchants!=null and !merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${merchants}" th:if="${merchant.type=='EPP'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="8" align="center"><span
+                                                            th:if="${merchants==null or merchants.empty}">EPP Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade card" id="qr-pills">
+                                            <h6 class="text-secondary div-pd-10">Select QR Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${merchants!=null and !merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${merchants}" th:if="${merchant.type=='QR'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="8" align="center"><span
+                                                            th:if="${merchants==null or merchants.empty}">QR Merchants Not Configured</span>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade card" id="amex-pills">
+                                            <h6 class="text-secondary div-pd-10">Select AMEX Merchants</h6>
+                                            <table class="table table-striped table-responsive-md"
+                                            >
+                                                <tr th:if="${merchants!=null and !merchants.empty}">
+                                                    <th>ID</th>
+                                                    <th>Category</th>
+                                                    <th>MID</th>
+                                                    <th>TID</th>
+                                                    <th>Currency</th>
+                                                    <th>Description</th>
+                                                    <th class="theader">Default</th>
+                                                    <th class="theader">Selected</th>
+
+                                                </tr>
+                                                <tbody>
+                                                <tr th:each="merchant : ${merchants}" th:if="${merchant.type=='AMEX'}">
+                                                    <td th:text="${merchant.merchantId}"></td>
+                                                    <td th:text="${merchant.type}"></td>
+                                                    <td th:text="${merchant.mid}"></td>
+                                                    <td th:text="${merchant.tid}"></td>
+                                                    <td th:text="${merchant.currency}"></td>
+                                                    <td th:text="${merchant.description}"></td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="default" type="checkbox"
+                                                                   th:checked="${merchant.defaultMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group input-group">
+                                                            <input id="select" type="checkbox"
+                                                                   th:checked="${merchant.selectMerchant}"
+                                                                   class="form-control" th:disabled="true"/>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="8" align="center"><span
+                                                            th:if="${merchants==null or merchants.empty}">AMEX Merchants Not Configured</span>
+                                                    </td>
+
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p></p>
+            <div class="row">
+                <div class="col-md-12 align-right">
+                    <div>
+
+                        <!--  <a th:href="@{/admin-portal/modify-profile/{deviceId}/{profileId}(deviceId=${deviceForm.deviceId},profileId=${profileForm.profileId})}"
+													class="btn btn-info" th:disabled="true"
+													> Modify Profile </a> -->
+
+                        <a href="#modelDelete" class="trigger-btn btn btn-danger" data-toggle="modal"><i>
+                            Delete Profile</i></a>
+                        <div id="modelDelete" class="modal hide fade in" data-keyboard="false" data-backdrop="static">
+                            <div class="modal-dialog modal-delete">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="icon-box">
+                                            <i class="fa fa-question"></i>
+                                        </div>
+                                        <h4 class="modal-title w-100">Are you sure?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p class="text-center"
+                                           th:text="'Do you really want to delete ' + ${profileForm.profileName} + ' profile?'"></p>
+                                    </div>
+                                    <div class="modal-footer align-center">
+
+                                        <a
+                                                th:href="@{/admin-portal/remove-profile/{deviceId}/{profileId}(deviceId=${deviceForm.deviceId},profileId=${profileForm.profileId})}"
+                                                class="btn btn-danger"
+                                        > Delete
+                                        </a>
+
+                                        <button class="btn btn-primary btn-inline" data-dismiss="modal">Cancel</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a th:href="@{/admin-portal/view-device/{deviceId}(deviceId=${deviceForm.deviceId})}"
+                           class="btn btn-secondary"><i> Back</i></a>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

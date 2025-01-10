@@ -1,0 +1,73 @@
+server:
+  port: 2020
+  error:
+    include-message: always
+    include-binding-errors: always
+
+  forward-headers-strategy: NATIVE
+
+  servlet:
+    session:
+      timeout: 30m
+
+spring:
+  application:
+    name: admin-portal
+#  session:
+#    timeout: 72000
+    
+  thymeleaf:
+    cache: false
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+# Database Configs
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost/admin-portal
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: COMBK#PRD@123
+    pool-name: admin-portal
+    maximum-pool-size: 100
+    max-lifetime: 1200000
+    minimum-idle: 5
+    idle-timeout: 300000
+
+springdoc:
+  api-docs.path: /api-docs
+
+aiken:
+  email:
+    enable: true
+    subject: Aiken Admin Portal Username and Password
+    title: Welcome to AIKEN ADMIN PORTAL
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username: aikensoft.test@gmail.com
+    password: wmhzojrrebilztbd
+    port: 587
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  file:
+    name: C://Apps//Logs//admin-portal.log
+    path: C://Apps//Logs
+  level:
+    root: INFO
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:-%blue(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss}}) %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}(%line\)){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+    file: ${CONSOLE_LOG_PATTERN:-%blue(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss}}) %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}(%line\)){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}
+  

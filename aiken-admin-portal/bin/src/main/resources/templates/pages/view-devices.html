@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>View Devices</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<section class="my-5">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="text-primary">All Registered Devices</h3>
+					<div
+						style="margin-bottom: 20px; padding: 10px; background-color: #336699; color: white;">
+						<p>Type some text to search the table data</p>
+						<input class="form-control" id="inputFilter" type="text"
+							placeholder="Search.." />
+					</div>
+					<table id="deviceTable"
+						class="table table-striped table-responsive-md">
+						<tr>
+							<th>ID</th>
+							<th>Serial No</th>
+							<th>Bank</th>
+							<th>Merchant Name</th>
+							<th>Address</th>
+							<th>Contact No</th>
+							<th>SIM No</th>
+							<th>Mobile No</th>
+							<th>Last Update</th>
+							<th>Status</th>
+							<th>Modify</th>
+							<th>Delete</th>
+						</tr>
+
+						<tr th:each="device : ${devices}">
+							<td th:text="${device.deviceId}"></td>
+							<td th:text="${device.serialNo}"></td>
+							<td th:text="${device.bankName}"></td>
+							<td th:text="${device.merchantName}"></td>
+							<td th:text="${device.merchantAddress}"></td>
+							<td th:text="${device.custContactNo}"></td>
+							<td th:text="${device.simNo}"></td>
+							<td th:text="${device.mobileNo}"></td>
+							<td th:text="${device.lastUpdate}"></td>
+							<td th:text="${device.status}"></td>
+							<td><a
+								th:href="@{/admin-portal/modify-device/{serialNo}(serialNo=${device.serialNo})}"
+								class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
+							<td><a
+								th:href="@{/admin-portal/delete-device/{deviceId}(deviceId=${device.deviceId})}"
+								class="btn btn-primary"><i class="fas fa-trash-alt"></i></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</body>
+</html>

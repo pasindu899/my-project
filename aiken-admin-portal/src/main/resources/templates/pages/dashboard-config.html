@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-07-22
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Dashboard Configurations</title>
+	
+<script>
+
+window.onscroll = function () {
+
+  scrollFunction();
+};
+
+</script>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<section>
+
+			<div class="card-body">
+				<h3 class="text-primary">Dashboard Configurations</h3>
+				<div class="align-right">
+					
+				</div>
+				
+				<div class="col-md-12">
+				<div class="card">
+					<form action="#"  th:action="@{/admin-portal/update-dashboar-config}"
+						th:object="${dbConfigForm}" method="post" id="ConfigDBSettings" >
+
+		                <div class="card-body">
+		                    <h5 class="text-primary">Dashboard Widget Configurations</h5>
+		                    <div class="row">
+		                    
+		                        <div class="form-group col-md-2">
+		                            <label for="bankName" class="col-form-label text-center">User Role</label> 
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            <label for="widget1" class="col-form-label">Widget 1</label>
+		                            
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            <label for="merchantName" class="col-form-label">Widget 2</label> 
+		                            
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            <label for="merchantAddress" class="col-form-label">Widget 3</label> 
+		                           
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            <label for="merchantAddress" class="col-form-label">Widget 4</label> 
+		                            
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            <label for="merchantAddress" class="col-form-label">Widget 5</label> 
+		                            
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="form-group col-md-2">
+		                            <label for="bankName" class="col-form-label">ROLE_ADMIN</label> 
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox" th:field="*{roleAdminWdg1}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleAdminWdg2}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleAdminWdg3}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleAdminWdg4}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleAdminWdg5}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="form-group col-md-2">
+		                            <label for="bankName" class="col-form-label">ROLE_MANAGER</label> 
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"  th:field="*{roleMangrWdg1}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                           
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleMangrWdg2}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                           
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleMangrWdg3}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                           
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleMangrWdg4}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleMangrWdg5}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="form-group col-md-2">
+		                            <label for="bankName" class="col-form-label">ROLE_POS_USER</label> 
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"  th:field="*{rolePosWdg1}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{rolePosWdg2}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                             
+		                            <input id="autoReversal" type="checkbox"   th:field="*{rolePosWdg3}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{rolePosWdg4}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{rolePosWdg5}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="form-group col-md-2">
+		                            <label for="bankName" class="col-form-label">ROLE_USER</label> 
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"  th:field="*{roleUserWdg1}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleUserWdg2}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                           
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleUserWdg3}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleUserWdg4}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleUserWdg5}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="form-group col-md-2">
+		                            <label for="bankName" class="col-form-label">ROLE_BANK_USER</label> 
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"  th:field="*{roleBankUserWdg1}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleBankUserWdg2}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                           
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleBankUserWdg3}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleBankUserWdg4}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                        <div class="form-group col-md-2">
+		                            
+		                            <input id="autoReversal" type="checkbox"   th:field="*{roleBankUserWdg5}" class="checkbox-format input-group-addon"/>
+		                        </div>
+		                    </div>
+		                    
+		                </div>
+		            
+		            <div class="row">
+						
+						<div class="card-body">
+							<div class="col-md-12 align-right">
+								<input type="submit" class="btn btn-success" value="Update Changes"  id="btnUpdateChanges">
+							</div>
+						</div>
+					</div>
+					
+		            </form>
+		            </div>
+		          </div>
+		       
+
+			</div>
+				
+		</section>
+
+	</div>
+
+</body>
+</html>

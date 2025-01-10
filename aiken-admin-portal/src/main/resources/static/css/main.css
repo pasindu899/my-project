@@ -1,0 +1,637 @@
+footer {
+    /*position: fixed;*/
+    height: 1px;
+    bottom: 0;
+    color: black;
+    text-align: center;
+    width: 100%;
+   /* background-color: rgb(239, 237, 238)*/
+}
+
+/*footer p {
+    padding: 15px;
+}*/
+
+.error {
+    color: red;
+    font-style: italic;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input {
+    margin-top: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin button {
+    margin-top: 10px;
+}
+
+.has-error {
+    color: red
+}
+.align-right{
+	display: flex; 
+	justify-content: flex-end;
+	
+}
+.align-center{
+	display: flex; 
+	justify-content:center;
+	
+}
+.fixed {
+    position:fixed;
+}
+.affix {
+	top: 0px;
+	margin: 0px 20px;
+}
+.affix + .container {
+	padding: 5px;
+}
+.display-off{
+	display: none;
+}
+.display-on{
+	display: contents;
+}
+.top-nav{
+	position:fixed;
+	top:0;
+	width: 100%;
+}
+.navbar {
+   z-index: 10000;
+   position: fixed;
+   top: 0px;
+   width: 100%;
+   
+}
+body{
+	margin-top: 75px;
+}
+body {
+  overflow: scroll;
+}
+
+.body-color {
+  background: #8F8C8C; 
+  }
+
+.modal-confirm {		
+	color: red;
+	width: 325px;
+	font-size: 14px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+.modal-confirm .form-control, .modal-confirm .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}	
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+}	
+.modal-confirm .icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: red;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.modal-confirm .icon-box i {
+	font-size: 48px;
+	position: relative;
+	top: 3px;
+}
+.modal-confirm.modal-dialog {
+	margin-top: 150px;
+}
+.modal-confirm .btn {
+	color: white;
+	border-radius: 4px;
+	background: red;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+	background: #441;
+	outline: none;
+}
+
+.modal-success {		
+	color: #636363;
+	width: 325px;
+	font-size: 14px;
+}
+.modal-success .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-success .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-success h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+.modal-success .form-control, .modal-success .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.modal-success .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}	
+.modal-success .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+}	
+.modal-success .icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: #82ce34;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.modal-success .icon-box i {
+	font-size: 58px;
+	position: relative;
+	top: 3px;
+}
+.modal-success.modal-dialog {
+	margin-top: 150px;
+}
+.modal-success .btn {
+	color: #fff;
+	border-radius: 4px;
+	background: #82ce34;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+.modal-success .btn:hover, .modal-success .btn:focus {
+	background: #6fb32b;
+	outline: none;
+}
+
+.modal-delete {		
+	color: #636363;
+	width: 325px;
+	font-size: 14px;
+}
+.modal-delete .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-delete .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-delete h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -15px;
+}
+.modal-delete .form-control, .modal-delete .btn {
+	min-height: 40px;
+	border-radius: 3px; 
+}
+.modal-delete .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}	
+.modal-delete .modal-footer {
+	border: none;
+	text-align: center;
+	border-radius: 5px;
+	font-size: 13px;
+}	
+.modal-delete .icon-box {
+	color: #fff;		
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	top: -70px;
+	width: 95px;
+	height: 95px;
+	border-radius: 50%;
+	z-index: 9;
+	background: red;
+	padding: 15px;
+	text-align: center;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.modal-delete .icon-box i {
+	font-size: 58px;
+	position: relative;
+	top: 3px;
+}
+.modal-delete.modal-dialog {
+	margin-top: 150px;
+}
+.modal-delete .btn {
+	color: #fff;
+	border-radius: 4px;
+	
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border: none;
+}
+.modal-delete .btn:hover, .modal-delete .btn:focus {
+	background: #6fb32b;
+	outline: none;
+}
+.modal-dialog {
+	margin-top: 150px;
+}
+
+.btnn {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+
+	
+	width: 150px;
+
+}
+
+.btnn-w460 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 460px;
+
+}
+.btnn-w445 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 445px;
+
+}
+
+.btnn-w450 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 425px;
+
+}
+
+.btnn-w400 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 380px;
+
+}
+
+.btnn-w250 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 250px;
+
+}
+
+.btnn-w300 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 285px;
+
+}
+.btnn-w350 {
+	color: #0099CC;
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+
+	width: 325px;
+
+}
+
+
+.btnn-w200 {
+	color: #0099CC; 
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+	
+	width: 190px;
+
+}
+.btnn-w100 {
+	color: #0099CC;
+	background: transparent; /* Remove background color */
+	border: 2px solid #0099CC; /* Border thickness, line style, and color */
+	border-radius: 10px; /* Adds curve to border corners */
+
+	width: 100px;
+}
+
+.chk{
+	padding: 10px;
+	width: 30px;
+	height: 30px;
+	border: 2px solid #0099CC;
+}
+.theader{
+	text-align:center;
+}
+.navbar-nav > .active > a {
+  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
+
+}
+.nav-item > a:hover {
+  color: #800000;
+}
+.navbar-nav > .selected > a {
+  color: #000000;
+  background-color: #0000d2;   
+  border-bottom-color: #0000ff;
+   display: block;
+  padding: 12px 38px;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  background-color: #0080ff;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%; 
+}
+
+.div-pd-10{
+	padding: 10px;
+}
+
+/* input{
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  transition: box-shadow .3s;
+  background: lightgrey;
+  cursor: pointer;
+  border: 0;
+  appearance: none; -webkit-appearance: none;
+ } */
+ .pb-25 {
+  padding-bottom:25px; 
+}
+ 
+.checkbox-format{
+	font-weight: 300; 
+	font-size: 16px; 
+	width: 40px; height: 40px;
+}
+.checkbox-format-w80{
+	font-weight: 300; 
+	font-size: 16px; 
+	width: 40px; height: 40px;
+}
+.textbox-format{
+	width: 80px; height: 40px;
+}
+.textbox-format-190{
+	width: 190px; height: 40px;
+}
+.textbox-format-215{
+	width: 215px; height: 40px;
+}
+.textbox-format-400{
+	width: 400px; height: 40px;
+}
+.addon-text-width{
+	width: 110px;
+}
+.tabinator {
+  background: #fff;
+  padding: 40px;
+  font-family: Open Sans;
+}
+.addon-text-w-150{
+	width: 150px;
+}
+
+.round-border-50 {
+  border-radius: 50%;
+  border: 5px solid #3535ff;
+  border: 2px solid #ffffff;
+}
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}
+
+/* Gray */
+.default {
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.default:hover {
+  background: #e7e7e7;
+}
+.text-align-center{
+	text-align:center
+}
+.fs-25{
+  font-size: 25px;
+}
+.fa-blue {
+	color: blue;
+
+}
+.btn-back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+/* Style the counter cards */
+.card {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 10px;
+  /* text-align: center; */
+  /* background-color: #f1f1f1; */
+}
+.card-bg {
+		    background-color: rgb(221, 244, 254);
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+.form-check.form-check-flat label input:checked + .input-helper:before {
+  background-color: #00ce68;
+  border: none; }
+
+.form-check.form-check-flat label input:disabled + .input-helper:after {
+  color: #ffffff; }
+
+.form-check.form-check-flat label input:disabled + .input-helper:before {
+  border-color: #f2f2f2; }
+
+.form-check.form-check-flat label input:disabled:checked + .input-helper:before {
+  background: #f7f7f9; }
+
+.form-check.form-check-flat label .input-helper:before {
+  border: 2px solid #f2f2f2; }
+
+.form-check.form-check-flat label .input-helper:after {
+  color: #ffffff; }
+
+  td ,th {
+    text-align: center;
+  }

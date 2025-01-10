@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-07-20 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Event Operation Successful</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 align-center">
+                	<div>
+                		<h2 class="text-success">New event added successfully</h2>
+                	</div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 align-center">
+                    <a th:href="@{/admin-portal/view-events}"
+                       class="btn btn-secondary"><i> Back</i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

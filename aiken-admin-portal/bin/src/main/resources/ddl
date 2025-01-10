@@ -1,0 +1,134 @@
+drop table sys_user;
+drop table bank;
+drop table scan_param;
+drop table amex_param;
+drop table merchant;
+drop table device;
+
+create table sys_user(
+	 user_id serial not null, 
+	 username character varying(60) not null unique,  
+	 password character varying(255) not null, 
+	 user_role character varying(40) not null, 
+	 active boolean not null, 
+	 primary key (user_id)
+);
+
+create table bank(
+	 bank_id serial not null, 
+	 bank_code character varying(10) not null unique,
+	 bank_name character varying(60) not null,   
+	 description character varying(40),  
+	 primary key (bank_id)
+);
+
+create table device(
+	 device_id serial not null, 
+	 serial_no character varying(40) not null unique,  
+	 token character varying(400), 
+	 bank_code character varying(10), 
+	 bank_name character varying(60) not null, 	 
+	 merchant_name character varying(100) not null,
+	 merchant_address character varying(255) not null,  
+	 visa_no_cvm_limit numeric(10, 2) DEFAULT 5000.01, 
+	 cntactls_trxn_limit numeric(10, 2) DEFAULT 20000,
+	 bin_block boolean, 
+	 bin character varying(400), 
+	 pre_auth boolean,
+	 ecr boolean,
+	 key_in boolean,
+	 auto_settle boolean,
+	 auto_settle_time character varying(30),
+	 force_settle boolean,
+	 added_date character varying(60) not null,  
+	 added_by character varying(60) not null, 
+	 last_update character varying(60) not null,  
+	 updated_by character varying(60) not null,  
+	 status character varying(40) not null, 
+	 primary key (device_id)
+ );
+
+create table merchant(
+	merchant_id serial not null, 
+	type character varying(40) not null, 
+	month integer, 
+	mid character varying(20) not null, 
+	tid character varying(20) not null, 
+	currency character varying(3) not null, 
+	description varchar(100), 
+	min_amount numeric(19, 2), 
+	max_amount numeric(19, 2),  
+	bin_block boolean, 
+	bin integer, 
+	pre_auth boolean, 
+	jcb_cntls boolean, 
+	mc_cntls boolean, 	 
+	upay_cntls boolean, 
+	visa_cntls boolean, 
+	void_tx boolean, 
+	amex_tx boolean, 
+	device_id integer not null, 
+	primary key (merchant_id),
+	foreign key (device_id) references device (device_id)
+);  
+  
+create table scan_param(
+	 scan_param_id serial not null, 		
+	 m_user_id character varying(60) not null, 
+	 m_password character varying(100) not null,  
+	 checksum_key character varying(160) not null,  
+     merchant_id integer not null, 	 
+	 primary key (scan_param_id),
+	 foreign key (merchant_id) references merchant (merchant_id)
+);
+
+create table amex_param(
+	 amex_param_id serial not null, 	
+	 amex_ip character varying(40) not null,
+	 amex_port integer not null,
+	 amex_tpdu bigint not null,
+	 amex_nii integer not null, 
+     merchant_id integer not null, 	 
+	 primary key (amex_param_id),
+	 foreign key (merchant_id) references merchant (merchant_id)
+);
+
+ALTER TABLE merchant ADD UNIQUE (mid, type, currency, description);
+
+insert into sys_user(username, password, user_role, active)
+	values('admin', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_ADMIN', true);
+insert into sys_user(username, password, user_role, active)
+	values('manager', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_MANAGER', true);
+insert into sys_user(username, password, user_role, active)
+	values('pos', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_POS_USER', true);
+insert into sys_user(username, password, user_role, active)
+	values('user', '$2a$10$PrI5Gk9L.tSZiW9FXhTS8O8Mz9E97k2FZbFvGFFaSsiTUIl.TCrFu', 'ROLE_USER', true);
+	
+-- PPA_Aiken@12321 password
+insert into sys_user(username, password, user_role, active)
+	values('pos_user_combank', '$2a$10$lZKpr5hfY1fVpLdCRd9HFuzjNS8sDotAVEYK9kEuDLhtiuvQPfFMm', 'ROLE_POS_USER', true);
+-- PPA_Aiken@78987 password
+insert into sys_user(username, password, user_role, active)
+	values('pos_user_sdb', '$2a$10$yK3QnMTmlqj1uhYV2MYL3eYl1F1a/TGVLMLZMQ0FgVo3Q8uSlLkSC', 'ROLE_POS_USER', true);
+	
+
+ALTER TABLE public.amex_param
+    ALTER COLUMN amex_port DROP NOT NULL;
+
+ALTER TABLE public.amex_param
+    ALTER COLUMN amex_tpdu DROP NOT NULL;
+
+ALTER TABLE public.amex_param
+    ALTER COLUMN amex_nii DROP NOT NULL;
+
+ALTER TABLE public.device
+    ADD COLUMN mobile_no character varying(20);
+
+ALTER TABLE public.device
+    ADD COLUMN sim_no character varying(30);
+
+ALTER TABLE public.deviceadmin
+    ADD COLUMN cust_contact_no character varying(20);
+
+ALTER TABLE public.device
+    ADD COLUMN remark character varying(200);

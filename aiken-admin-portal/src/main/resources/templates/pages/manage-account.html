@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--
+	@author Nandana Basnayake
+
+	@Created @ 2021-11-06
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Manage User Account</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        
+                <div class="card-body">
+                   
+			           	<img class="round-border-50 img-center shadow h-100" th:src="@{/images/img_profile.png}" alt="Avatar" style="width:100px">
+				     	<br>
+			       		<div class="align-center div-margin-0">
+						      <p class="text-align-center">
+						     		<strong class="fs-25" th:text="' ' + ${firstname} + ' ' + ${lastname}"></strong>
+						     		<br>
+						     		<i th:text="${user}"></i>
+						     </p>
+						</div>
+						<p><i  th:text="'Welcome, ' + ${firstname} + ' ' + ${lastname} +'. Manage your Account info, Privacy and Security here '"></i></p>
+				    
+                    <div class="card shadow h-100">
+                    	<p></p>
+                        <div class="col-md-12">
+                        	<div >
+                        	
+                        		<!-- Content Row -->
+			                    <div class="row">
+			
+			                        
+			                        <div class="col-xl-3 col-md-6 mb-4">
+			                            <div class="card border-left-primary shadow h-100 py-2">
+			                                <div class="card-body">
+			                                    <div class="row no-gutters align-items-center">
+			                                        <div class="col mr-2">
+			                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+			                                               
+			                                                <span>
+																<a href="#" class="text-xs font-weight-bold text-primary text-uppercase mb-1" onClick="showChangePassword()" >
+																 Change your Password</a>
+															</span>
+			                                                </div>
+			                                            <div class="h6 mb-0  text-gray-800">Password</div>
+			                                        </div>
+			                                        <div class="col-auto">
+			                                            <i class="fas fa-key fa-2x text-primary"></i>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			
+			                       
+			                        <div class="col-xl-3 col-md-6 mb-4">
+			                            <div class="card border-left-success shadow h-100 py-2">
+			                                <div class="card-body">
+			                                    <div class="row no-gutters align-items-center">
+			                                        <div class="col mr-2">
+			                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+			                                                <span>
+																<a href="#" class="text-xs font-weight-bold text-info text-uppercase mb-1" onClick="showChangeUsername()" >
+																 Change your Username</a>
+															</span>
+			                                                </div>
+			                                            <div class="h6 mb-0  text-gray-800">Username</div>
+			                                        </div>
+			                                        <div class="col-auto">
+			                                            <i class="fas fa-user fa-2x text-info"></i>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			
+			                      
+			                        <div class="col-xl-3 col-md-6 mb-4">
+			                            <div class="card border-left-info shadow h-100 py-2">
+			                                <div class="card-body">
+			                                    <div class="row no-gutters align-items-center">
+			                                        <div class="col mr-2">
+			                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+			                                            <span>
+																<a href="#" class="text-xs font-weight-bold text-success text-uppercase mb-1" onClick="showChangeDisplayname()" >
+																 Change your Display Name</a>
+															</span>
+			                                            </div>
+			                                            <div class="row no-gutters align-items-center">
+			                                                <div class="col-auto">
+			                                                    <div class="h6 mb-0 mr-3  text-gray-800">Currently not available</div>
+			                                                </div>
+			                                            </div>
+			                                        </div>
+			                                        <div class="col-auto">
+			                                            <i class="fas fa-clipboard-list fa-2x text-success"></i>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			
+			                     
+			                        <div class="col-xl-3 col-md-6 mb-4">
+			                            <div class="card border-left-warning shadow h-100 py-2">
+			                                <div class="card-body">
+			                                    <div class="row no-gutters align-items-center">
+			                                        <div class="col mr-2">
+			                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+			                                                Change personal info</div>
+			                                            <div class="h6 mb-0 text-gray-800">Currently not available</div>
+			                                        </div>
+			                                        <div class="col-auto">
+			                                            <i class="fas fa-info-circle fa-2x text-warning"></i>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+
+                        	<div class="card" th:classappend="${#strings.equals(enableDiv, 'password')} ? display-on : display-off"   id="div_password">
+                        		<!-- Basic Card Change Password -->
+	                            <div class="card shadow"  >
+	                                <div class="card-header">
+	                                    <h6 class="m-0 font-weight-bold text-primary">Change Your Password</h6>
+	                                </div>
+	                                <div class="card-body ">
+	                                    <div >
+	                                    	<form action="#" th:action="@{/admin-portal/change-password}"
+												th:object="${changePwForm}" method="post">
+												<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+													<p>Please Correct Errors Below</p>
+												</div>
+												<div th:if="${message != null}" class="m-3">
+											        <p class="alert alert-danger">[[${message}]]</p>
+											    </div> 
+								
+												<div class="card">
+													<div class="card-body">
+								
+														<div class="row col-lg-12">
+															<div class="form-group col-md-4">
+																<label for="currentPassword" class="col-form-label">Current Password</label> <input
+																	id="currentPassword" type="password"  class="form-control"  th:field="*{currentPassword}"/>
+																<span class="help-block" th:if="${#fields.hasErrors('currentPassword')}">
+																	<p th:errors="*{currentPassword}" class="text-danger">Invalid Password</p>
+																</span>
+															</div>
+															<div class="form-group col-md-4">
+																<label for="newPassword" class="col-form-label">New Password</label> <input
+																	id="newPassword" type="password"  class="form-control" th:field="*{newPassword}"/>
+																<span class="help-block" th:if="${#fields.hasErrors('newPassword')}">
+																	<p th:errors="*{newPassword}" class="text-danger">Invalid Password</p>
+																</span>
+															</div>
+															<div class="form-group col-md-4">
+																<label for="reNewPassword" class="col-form-label">Re Enter New Password</label> <input
+																	id="reNewPassword" type="password"  class="form-control" th:field="*{reNewPassword}"/>
+																<span class="help-block" th:if="${#fields.hasErrors('reNewPassword')}">
+																	<p th:errors="*{reNewPassword}" class="text-danger">Invalid Password</p>
+																</span>
+															</div>
+															
+														</div>
+								
+														
+													</div>
+												</div>
+												<p></p>
+								
+												
+												
+								
+												<div class="row">
+													<div class="col-md-12 align-right">
+														<div>
+															<input type="submit" id="saveChanges"
+																class="btn btn-info icon-shopping-cart icon-large"
+																value="Save Changes" />
+														</div>
+													</div>
+													
+													
+												</div>
+											</form>
+											
+													<!-- <input type="hidden" th:field="*{div_username}" id="mdl_username"> -->
+													
+											
+	                                    
+	                                </div>
+	                            </div>
+							</div>	
+                        </div>
+                        
+                        <div class="card" th:classappend="${#strings.equals(enableDiv, 'username')} ? display-on : display-off"   id="div_username">
+                        		<!-- Basic Card Change Username -->
+	                            <div class="card shadow"  >
+	                                <div class="card-header">
+	                                    <h6 class="m-0 font-weight-bold text-info">Change Your Username</h6>
+	                                </div>
+	                                <div class="card-body ">
+	                                    <div >
+	                                    	<div class="h6 mb-0 text-gray-800">Currently not available</div>
+	                                	</div>
+	                            </div>
+							</div>	
+                        </div>
+                         <div class="card" th:classappend="${#strings.equals(enableDiv, 'display')} ? display-on : display-off"   id="div_displayname">
+                        		<!-- Basic Card Display Name -->
+	                            <div class="card shadow"  >
+	                                <div class="card-header">
+	                                    <h6 class="m-0 font-weight-bold text-success">Change Your Display Name</h6>
+	                                </div>
+	                                <div class="card-body ">
+	                                    <div >
+	                                    	<div class="h6 mb-0 text-gray-800">Currently not available</div>
+	                                	</div>
+	                            </div>
+							</div>	
+                        </div>
+                        
+                    </div>
+                    <br>
+                </div>
+                
+            </div>
+
+       	</div>
+</div>
+		<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+</body>
+</html>

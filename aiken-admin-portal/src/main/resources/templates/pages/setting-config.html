@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Setting Configuration</title>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        <div>
+            <br>
+            <div class="col-md-12">
+                <h3 class="text-primary">Configuration Settings View</h3>
+            </div>
+
+            <br>
+            <div class="card-body">
+
+                <h4 class="text-primary">Merchant Details</h4>
+                <table id="merchantTable" style="margin-top: 10px;"
+                       class="table table-striped table-responsive-md">
+                    <tr>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>MID</th>
+                        <th>TID</th>
+                        <th>Currency</th>
+                        <th>Min Amount</th>
+                        <th>Max Amount</th>
+                        <th>Foreign Merchant</th>
+
+                    </tr>
+                    <tr th:each="m : ${merchant}">
+                        <td th:text="${m.type}"></td>
+                        <td th:text="${m.category}"></td>
+                        <td th:text="${m.mid}"></td>
+                        <td th:text="${m.tid}"></td>
+                        <td th:text="${m.currency}"></td>
+                        <td th:text="${m.minAmount}"></td>
+                        <td th:text="${m.maxAmount}"></td>
+                        <td th:text="${m.foreignMer}"></td>
+
+                    </tr>
+
+                </table>
+                <br>
+                <h4 class="text-primary">Profile Details</h4>
+
+                <table id="profileTable" style="margin-top: 10px;"
+                       class="table table-striped table-responsive-md">
+                    <tr>
+                        <th>Profile Name</th>
+                        <th>Status</th>
+                        <th>Default</th>
+                        <th>Visa Contact</th>
+                        <th>Visa Contactless</th>
+                        <th>Mastercard Contact</th>
+                        <th>Mastercard Contactless</th>
+                        <th>Customer Copy</th>
+                        <th>Amex Contact</th>
+                        <th>Amex Contactless</th>
+                        <th>JCB Contact</th>
+                        <th>JCB Contactless</th>
+                        <th>Union-Pay Contact</th>
+                        <th>Union-Pay Contactless</th>
+
+
+                    </tr>
+                    <tr th:each="p : ${profile}">
+                        <td th:text="${p.pName}"></td>
+                        <td th:text="${p.status}"></td>
+                        <td th:text="${p.pDefault}"></td>
+                        <td th:text="${p.visaCnt ? '-' : '-'}"></td>
+                        <td th:text="${p.visaCntls ? '-' : '-'}"></td>
+                        <td th:text="${p.mcCnt ? '-' : '-'}"></td>
+                        <td th:text="${p.mcCntls ? '-' : '-'}"></td>
+                        <td th:text="${p.customerCopy ? '-' : '-'}"></td>
+                        <td th:text="${p.amexCnt ? '-' : '-'}"></td>
+                        <td th:text="${p.amexCntls ? '-' : '-'}"></td>
+                        <td th:text="${p.jcbCnt ? '-' : '-'}"></td>
+                        <td th:text="${p.jcbCntls ? '-' : '-'}"></td>
+                        <td th:text="${p.upayCnt ? '-' : '-'}"></td>
+                        <td th:text="${p.upayCntls ? '-' : '-'}"></td>
+
+                    </tr>
+
+                </table>
+
+                <br>
+
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+
+                                <br>
+                                <h2 class="text-primary">ECR Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> ECR Wifi</span>
+                                        <input id="ecrWifi" type="checkbox"
+                                               th:field="*{ecr.ecrWifi}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Enable Card Type Validation</span>
+                                        <input id="EcrCardTypeValidation" type="checkbox"
+                                               th:field="*{ecr.cardTypeValidation}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Sale Receipt</span>
+                                        <input id="tsaleReceipt" type="checkbox"
+                                               th:field="*{ecr.saleReceipt}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <h5 class="text-primary">Select Function</h5>
+                                <br>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Get Currency From Bin Request</span>
+                                        <input id="currencyFromBin" type="checkbox"
+                                               th:field="*{ecr.currencyFromBin}"
+                                               class="checkbox-format input-group-addon" th:disabled=true/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Get Currency from Card</span>
+                                        <input id="currencyFromCard" type="checkbox"
+                                               th:field="*{ecr.currencyFromCard}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Proceed With Lkr</span>
+                                        <input id="proceedWithLkr" type="checkbox"
+                                               th:field="*{ecr.proceedWithLkr}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <h5 class="text-primary">Select Input Mode</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Card Tap</span>
+                                        <input id="cardTap" type="checkbox"
+                                               th:field="*{ecr.cardTap}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Card Insert</span>
+                                        <input id="cardInsert" type="checkbox"
+                                               th:field="*{ecr.cardInsert}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Card Swipe</span>
+                                        <input id="cardSwipe" type="checkbox"
+                                               th:field="*{ecr.cardSwipe}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <h5 class="text-primary">ECR Wireless Settings</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">ECR IP</span>
+                                        <input id="ecrIp" type="text"
+                                               th:field="*{ecr.ecrIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">ECR Port</span>
+                                        <input id="ecrPort" type="text"
+                                               th:field="*{ecr.ecrPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">ECR AuthToken</span>
+                                        <input id="ecrAuthToken" type="checkbox"
+                                               th:field="*{ecr.ecrAuthToken}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Transaction Through SIM</span>
+                                        <input id="tranToSim" type="checkbox"
+                                               th:field="*{ecr.tranToSim}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="card">
+
+                                <br>
+                                <h2 class="text-primary">TLE Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Master Pos TLE Download</span>
+                                        <input id="masterPosEnable" type="checkbox"
+                                               th:field="*{tleSettings.masterPosEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Master Pos Port</span>
+                                        <input id="masterPosPort" type="text"
+                                               th:field="*{tleSettings.masterPosPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Master Pos IP</span>
+                                        <input id="masterPosIp" type="text"
+                                               th:field="*{tleSettings.masterPosIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <h5 class="text-primary">DEFAULT TLE</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">TLE Enable</span>
+                                        <input id="tleEnable" type="checkbox"
+                                               th:field="*{tleSettings.tleEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">TLE TPDU</span>
+                                        <input id="tleTpdu" type="text"
+                                               th:field="*{tleSettings.tleTpdu}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Non TLE TPDU</span>
+                                        <input id="nonTleTpdu" type="text"
+                                               th:field="*{tleSettings.nonTleTpdu}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">TLE NII</span>
+                                        <input id="tleNii" type="text"
+                                               th:field="*{tleSettings.tleNii}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Non TLE NII</span>
+                                        <input id="nonTleNii" type="text"
+                                               th:field="*{tleSettings.nonTleNii}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <h5 class="text-primary">AMEX TLE</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">AMEX TLE Enable</span>
+                                        <input id="amexTleEnable" type="checkbox"
+                                               th:field="*{tleSettings.amexTleEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">AMEX TLE TPDU</span>
+                                        <input id="amexTleTpdu" type="text"
+                                               th:field="*{tleSettings.amexTleTpdu}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">NON AMEX TLE TPDU</span>
+                                        <input id="amexNonTleTpdu" type="text"
+                                               th:field="*{tleSettings.amexNonTleTpdu}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">AMEX TLE NII</span>
+                                        <input id="amexTleNii" type="text"
+                                               th:field="*{tleSettings.amexTleNii}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">NON AMEX TLE NII</span>
+                                        <input id="amexNonTleNii" type="text"
+                                               th:field="*{tleSettings.amexNonTleNii}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+
+                                <br>
+                                <h2 class="text-primary">DCC Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">DCC Enable</span>
+                                        <input id="dccEnable" type="checkbox"
+                                               th:field="*{dccSetting.dccEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">DCC TPDU</span>
+                                        <input id="dccTpdu" type="text"
+                                               th:field="*{dccSetting.dccTpdu}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">DCC NII</span>
+                                        <input id="dccNii" type="text"
+                                               th:field="*{dccSetting.dccNii}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">ORI.INS. NAME</span>
+                                        <input id="oriInsName" type="text"
+                                               th:field="*{dccSetting.oriInsName}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Activity Tracking Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Activity History</span>
+                                        <input id="activityHistory" type="checkbox"
+                                               th:field="*{activityTracking.activityHistory}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Max Succ ActivityCount</span>
+                                        <input id="maxSuccActivityCount" type="text"
+                                               th:field="*{activityTracking.maxSuccActivityCount}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Max Fail Activity Count</span>
+                                        <input id="maxFailActivityCount" type="text"
+                                               th:field="*{activityTracking.maxFailActivityCount}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Active Offline User Details</h2>
+                                <br>
+                                <table id="activeUserTable" style="margin-top: 10px;"
+                                       class="table table-striped table-responsive-md">
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Password</th>
+
+                                    </tr>
+                                    <tr th:each="ac : ${activeUser}">
+                                        <td th:text="${ac.userNo}"></td>
+                                        <td th:text="${ac.password}"></td>
+                                    </tr>
+
+                                </table>
+                                <br>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="card">
+
+                                <br>
+                                <h2 class="text-primary">Transaction Settings</h2>
+                                <br>
+                                <br>
+                                <h5 class="text-primary">Transaction Switching Control</h5>
+                                <br>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Sale </span>
+                                        <input id="saleEnable" type="checkbox"
+                                               th:field="*{transaction.saleEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Void </span>
+                                        <input id="voidEnable" type="checkbox"
+                                               th:field="*{transaction.voidEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Pre-Auth</span>
+                                        <input id="preAuthEnable" type="checkbox"
+                                               th:field="*{transaction.preAuthEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Easy Pmt Plans</span>
+                                        <input id="eppEnable" type="checkbox"
+                                               th:field="*{transaction.eppEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> QR Pmts</span>
+                                        <input id="qrPaymentEnable" type="checkbox"
+                                               th:field="*{transaction.qrPaymentEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Void QR</span>
+                                        <input id="voidQr" type="checkbox"
+                                               th:field="*{transaction.voidQr}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Fallback L4</span>
+                                        <input id="fallbackL4" type="checkbox"
+                                               th:field="*{transaction.fallbackL4}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Reversal History</span>
+                                        <input id="reversalHistory" type="checkbox"
+                                               th:field="*{transaction.reversalHistory}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Offline Sale </span>
+                                        <input id="offlineSaleEnable" type="checkbox"
+                                               th:field="*{transaction.offlineSaleEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Digital Signature </span>
+                                        <input id="signaturePadEnable" type="checkbox"
+                                               th:field="*{transaction.signaturePadEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <h5 class="text-primary">Other Transaction</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Enter Supervisor PIN</span>
+                                        <input id="supervisorPin" type="checkbox"
+                                               th:field="*{transaction.supervisorPin}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Manual Key In</span>
+                                        <input id="manualKeyIn" type="checkbox"
+                                               th:field="*{transaction.manualKeyIn}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Amex Key In</span>
+                                        <input id="amexKeyIn" type="checkbox"
+                                               th:field="*{transaction.amexKeyIn}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Amex Pre-Auth</span>
+                                        <input id="amexPreAuth" type="checkbox"
+                                               th:field="*{transaction.amexPreAuth}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">PreAuth key in</span>
+                                        <input id="mkiPreAuth" type="checkbox"
+                                               th:field="*{transaction.mkiPreAuth}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Offline key in</span>
+                                        <input id="mkiPreAuthOffline" type="checkbox"
+                                               th:field="*{transaction.mkiPreAuthOffline}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Foreign Currency Pmts From LKR</span>
+                                        <input id="foreignCurrencyPmtFromLkr" type="checkbox"
+                                               th:field="*{transaction.foreignCurrencyPmtFromLkr}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Push Notification</span>
+                                        <input id="pushyEnable" type="checkbox"
+                                               th:field="*{transaction.pushyEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Separate Mid/Tid</span>
+                                        <input id="separateMidTid" type="checkbox"
+                                               th:field="*{transaction.separateMidTid}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Contactless Transaction Limit</span>
+                                        <input id="maxAmount" type="text"
+                                               th:field="*{transaction.maxAmount}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Visa No-CVM Limit</span>
+                                        <input id="visaRfNoCvmLimit" type="text"
+                                               th:field="*{transaction.visaRfNoCvmLimit}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Auto Settlement</span>
+                                        <input id="autoSettle" type="checkbox"
+                                               th:field="*{transaction.autoSettle}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Force Settlement</span>
+                                        <input id="forceSettle" type="checkbox"
+                                               th:field="*{transaction.forceSettle}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">No Settlement</span>
+                                        <input id="noSettle" type="checkbox"
+                                               th:field="*{transaction.noSettle}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Max TransCount</span>
+                                        <input id="maxTransCount" type="text"
+                                               th:field="*{transaction.maxTransCount}"
+                                               class="textbox-format-215 " th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">QpsNoPsw Limit</span>
+                                        <input id="qpsNoPswLimit" type="text"
+                                               th:field="*{transaction.qpsNoPswLimit}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450"> Input RefNumber</span>
+                                        <input id="inputRefNumber" type="checkbox"
+                                               th:field="*{transaction.inputRefNumber}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Log Settings</h2>
+                                <br>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">SDK Log</span>
+                                        <input id="sdkLog" type="checkbox"
+                                               th:field="*{logging.sdkLog}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">EMV Log</span>
+                                        <input id="emvLog" type="checkbox"
+                                               th:field="*{logging.emvLog}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Log Level</span>
+                                        <input id="logLevel" type="text"
+                                               th:field="*{logging.logLevel}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Maximum Log File Size(GB)</span>
+                                        <input id="maxLogFileSize" type="text"
+                                               th:field="*{logging.maxLogFileSize}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Log Delete Time(Days)</span>
+                                        <input id="logDeleteTime" type="text"
+                                               th:field="*{logging.logDeleteTime}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">log Deletion Low Space(MB)</span>
+                                        <input id="logMinFreeSpace" type="text"
+                                               th:field="*{logging.logMinFreeSpace}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Maximum Log Cleanup(MB)</span>
+                                        <input id="logFreeUpLevel" type="text"
+                                               th:field="*{logging.logFreeUpLevel}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Receipt Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Customer Copy Enable</span>
+                                        <input id="customerCopyEnable" type="checkbox"
+                                               th:field="*{receiptSettings.customerCopyEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Printless Mode enable</span>
+                                        <input id="printless" type="checkbox"
+                                               th:field="*{receiptSettings.printless}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            <!--                            <div class="card">-->
+                            <!--                                <br>-->
+                            <!--                                <h2 class="text-primary">Other Settings</h2>-->
+                            <!--                                <br>-->
+                            <!--                                <div>-->
+                            <!--                                    <div class="form-group input-group ">-->
+                            <!--                                        <span class="input-group-addon btnn-w250">Auto Settlement State</span>-->
+                            <!--                                        <input id="autoSettleState" type="text"-->
+                            <!--                                               th:field="*{otherSettings.autoSettleState}"-->
+                            <!--                                               class="textbox-format-215" th:readonly="true"/>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                                <div>-->
+                            <!--                                    <div class="form-group input-group ">-->
+                            <!--                                        <span class="input-group-addon btnn-w250">Auto Settlement Failed</span>-->
+                            <!--                                        <input id="autoSettleFailed" type="text"-->
+                            <!--                                               th:field="*{otherSettings.autoSettleFailed}"-->
+                            <!--                                               class="textbox-format-215" th:readonly="true"/>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <!--                            <br>-->
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Communication Parameter Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Communication Timeout Period</span>
+                                        <input id="commTimeout" type="text"
+                                               th:field="*{communication.commTimeout}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">TPDU</span>
+                                        <input id="commTpdu" type="text"
+                                               th:field="*{communication.commTpdu}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Port</span>
+                                        <input id="commPort" type="text"
+                                               th:field="*{communication.commPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250"> IP Mobitel</span>
+                                        <input id="mobitelIp" type="text"
+                                               th:field="*{communication.mobitelIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">IP Dialog</span>
+                                        <input id="dialogIp" type="text"
+                                               th:field="*{communication.dialogIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">APN Dialog </span>
+                                        <input id="dialogApn" type="text"
+                                               th:field="*{communication.dialogApn}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">APN Mobitel </span>
+                                        <input id="mobitelApn" type="text"
+                                               th:field="*{communication.mobitelApn}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <br>
+                                <h5 class="text-primary">JCB</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">JCB Transaction</span>
+                                        <input id="jcbEnable" type="checkbox"
+                                               th:field="*{communication.jcbEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">IP Dialog</span>
+                                        <input id="jcbDialogIp" type="text"
+                                               th:field="*{communication.jcbDialogIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">IP Mobitel</span>
+                                        <input id="jcbMobitelIp" type="text"
+                                               th:field="*{communication.jcbMobitelIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Port</span>
+                                        <input id="jcbPort" type="text"
+                                               th:field="*{communication.jcbPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <br>
+                                <h5 class="text-primary">Amex</h5>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Amex Transaction</span>
+                                        <input id="enableAmex" type="checkbox"
+                                               th:field="*{communication.enableAmex}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Amex Port</span>
+                                        <input id="amexPort" type="text"
+                                               th:field="*{communication.amexPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">NII</span>
+                                        <input id="amexNii" type="text"
+                                               th:field="*{communication.amexNii}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250"> IP Dialog</span>
+                                        <input id="amexDialogIp" type="text"
+                                               th:field="*{communication.amexDialogIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">IP Mobitel</span>
+                                        <input id="amexMobitelIp" type="text"
+                                               th:field="*{communication.amexMobitelIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+
+                                <br>
+                                <h2 class="text-primary">Digital Web Portal Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Web Portal Enable</span>
+                                        <input id="digitalBillEnable" type="checkbox"
+                                               th:field="*{receiptSettings.digitalBillEnable}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">CLIENT CREDENTIALS </span>
+                                        <input id="credentialsType" type="text"
+                                               th:field="*{authSetting.credentialsType}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">TRANFER TYPE </span>
+                                        <input id="transferType" type="text"
+                                               th:field="*{authSetting.transferType}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">URL</span>
+                                        <input id="url" type="text"
+                                               th:field="*{authSetting.url}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">AUTH SERVER PORT</span>
+                                        <input id="authServerPort" type="text"
+                                               th:field="*{authSetting.authServerPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">MERCHANT PORTAL PORT</span>
+                                        <input id="merchantPortalPort" type="text"
+                                               th:field="*{authSetting.merchantPortalPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Admin Portal Settings</h2>
+                                <br>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">URL</span>
+                                        <input id="oneClickSetupIp" type="text"
+                                               th:field="*{adminPortalConfig.oneClickSetupIp}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">PORT</span>
+                                        <input id="oneClickSetupPort" type="text"
+                                               th:field="*{adminPortalConfig.oneClickSetupPort}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">PROTOCOL</span>
+                                        <input id="oneClickSetupProtocol" type="text"
+                                               th:field="*{adminPortalConfig.oneClickSetupProtocol}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">AUTO UPDATE</span>
+                                        <input id="oneClickSetupAutoUpdate" type="text"
+                                               th:field="*{adminPortalConfig.oneClickSetupAutoUpdate}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+
+                                <br>
+                                <h2 class="text-primary">Scan Params Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn">Q+Scan Url</span>
+                                        <input id="scanUrl" type="text"
+                                               th:field="*{qrScanParams.scanUrl}"
+                                               class="textbox-format-400" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn">Q+View Url</span>
+                                        <input id="viewUrl" type="text"
+                                               th:field="*{qrScanParams.viewUrl}"
+                                               class="textbox-format-400" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn">Q+Refund Url</span>
+                                        <input id="refundUrl" type="text"
+                                               th:field="*{qrScanParams.refundUrl}"
+                                               class="textbox-format-400" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Q+Maximum Amount</span>
+                                        <input id="qrMaxAmount" type="text"
+                                               th:field="*{qrScanParams.qrMaxAmount}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Q+Minimum Amount</span>
+                                        <input id="qrMinAmount" type="text"
+                                               th:field="*{qrScanParams.qrMinAmount}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="card">
+                                <br>
+                                <h2 class="text-primary">Security Settings</h2>
+                                <br>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Open Debug Mode</span>
+                                        <input id="debugMode" type="checkbox"
+                                               th:field="*{security.debugMode}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w450">Push Notification</span>
+                                        <input id="pushNotification" type="checkbox"
+                                               th:field="*{security.pushNotification}"
+                                               class="checkbox-format input-group-addon" th:disabled="true"/>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">KeyLoad Password</span>
+                                        <input id="keyLoadPassword" type="text"
+                                               th:field="*{security.keyLoadPassword}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="form-group input-group ">
+                                        <span class="input-group-addon btnn-w250">Base MainKey IndexPin</span>
+                                        <input id="baseMainKeyIndexPin" type="text"
+                                               th:field="*{security.baseMainKeyIndexPin}"
+                                               class="textbox-format-215" th:readonly="true"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-md-12 align-right">
+                        <div>
+                            <a th:href="@{/admin-portal/view-devices}"
+                               class="btn btn-secondary"><i>Back</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

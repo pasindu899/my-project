@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!-- 	 
+	Application Home Page
+	
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+
+<head>
+
+<title>Dashboard</title>
+<meta http-equiv="refresh" content="60">
+<!-- <meta charset="ISO-8859-1"> -->
+<meta charset="utf-8">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/loader.js}"></script>
+
+</head>
+
+<body>
+	<div layout:fragment="content">
+
+		<br>
+		<br>
+		<br>
+		<div class="card ">
+			<div class="card-body card-bg">
+				<div class="row" th:if="${wgt1}">
+					<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6  grid-margin stretch-card" th:if="${showDeviceCount}">
+						<div class="card card-statistics card-outline-primary">
+							<div class="card-body">
+								<div class="clearfix">
+									<div class="float-left">
+										<i class="fa fa-tablet text-danger icon-lg"></i>
+									</div>
+									<div class="float-right">
+										<p class="mb-0 text-right">Devices</p>
+										<div class="fluid-container">
+											<h3 class="font-weight-medium text-right mb-0"
+												th:text="${dailyCount.deviceCount}"></h3>
+										</div>
+									</div>
+								</div>
+								<p class="text-muted mt-3 mb-0">
+									<i class="fa fa-tablet mr-1" aria-hidden="true"></i>
+									Configured Device Count (Live + Test + Other)
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6  grid-margin stretch-card" th:if="${!showDeviceCount}">
+						<div class="card card-statistics card-outline-primary">
+							<div class="card-body">
+								<div class="clearfix">
+									<div class="float-left">
+										<i class="fa fa-tablet text-danger icon-lg"></i>
+									</div>
+									<div class="float-right">
+										<p class="mb-0 text-right">POS Terminal Management System</p>
+										<div class="fluid-container">
+											<!--<h3 class="font-weight-medium text-right mb-0"
+												th:text="${dailyCount.deviceCount}"></h3>-->
+										</div>
+									</div>
+								</div>
+								<p class="text-muted mt-3 mb-0">
+									<i class="fa fa-tablet mr-1" aria-hidden="true"></i>
+									Aiken (Pvt) Ltd. No 267, Polhengoda Rd, Colombo 05
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+						<div class="card card-statistics card-outline-primary">
+							<div class="card-body">
+								<div class="clearfix">
+									<div class="float-left">
+										<i class="fa fa-users text-warning icon-lg"></i>
+									</div>
+									<div class="float-right">
+										<p class="mb-0 text-right">System Users</p>
+										<div class="fluid-container">
+											<h3 class="font-weight-medium text-right mb-0"
+												th:text="${userStatus.allUserCount}"></h3>
+										</div>
+									</div>
+								</div>
+								<p class="text-muted mt-3 mb-0">
+									<i class="fa fa-users mr-1" aria-hidden="true"></i>
+									Total Users of the System
+								</p>
+							</div>
+						</div>
+					</div>
+					<div
+						class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+						<div class="card card-statistics card-outline-primary">
+							<div class="card-body">
+								<div class="clearfix">
+									<div class="float-left">
+										<i class="fa fa-hand-pointer text-success icon-lg"></i>
+									</div>
+									<div class="float-right">
+										<p class="mb-0 text-right">One Click Setup</p>
+										<div class="fluid-container">
+											<h3 class="font-weight-medium text-right mb-0"
+												th:text="${dailyCount.oneClickDailyCount}"></h3>
+										</div>
+									</div>
+								</div>
+								<p class="text-muted mt-3 mb-0">
+									<i class="fa fa-hand-pointer-o" aria-hidden="true"></i> Today
+									One-Click-Setup Count
+								</p>
+							</div>
+						</div>
+					</div>
+					<div
+						class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+						<div class="card card-statistics card-outline-primary">
+							<div class="card-body">
+								<div class="clearfix">
+									<div class="float-left">
+										<i class="fa fa-calendar text-info icon-lg"></i>
+									</div>
+									<div class="float-right">
+										<p class="mb-0 text-right">Events</p>
+										<div class="fluid-container">
+											<h3 class="font-weight-medium text-right mb-0"
+												th:text="${dailyCount.eventDailyCount}"></h3>
+										</div>
+									</div>
+								</div>
+								<p class="text-muted mt-3 mb-0">
+									<i class="fa fa-calendar-o mr-1" aria-hidden="true"></i> Today
+									Event Count
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-7 grid-margin stretch-card">
+						<!--weather card-->
+						<div class="card card-weather card-outline-success">
+							<div class="card-body">
+								<div class="weather-date-location" id="currentDateTime">
+									<h3 class="align-center">You are Welcome</h3>
+									<h5 class="align-center">To</h5>
+									<h1 class="align-center text-info">AIKEN ADMIN PORTAL</h1>
+									<!-- <h1 id="dayOfWeekName"></h1>
+			                        <p class="text-gray" id="currentDate">
+			                            <span class="weather-date">25 October, 2016</span>
+			                            <span class="weather-location">London, UK</span>
+			                            
+			                        </p> -->
+									<br> <br>
+									<div class="float-left">
+										<h1 id="dayOfWeekName"></h1>
+										<p class="text-gray" id="currentDate">
+											<span class="weather-date">25 October, 2016</span> <span
+												class="weather-location">London, UK</span>
+										</p>
+									</div>
+									<div class="float-right">
+
+										<h2 id="currentTime"></h2>
+
+										<p></p>
+
+									</div>
+
+
+
+								</div>
+								<div class="weather-data d-flex"></div>
+							</div>
+
+						</div>
+						<!--weather card ends-->
+					</div>
+					<div class="col-lg-5">
+						<div class="row">
+							<div class="col-xl-12 stretch-card">
+								<div class="card card-outline-success">
+									<div class="card-body">
+										<div class="clearfix">
+											<div class="float-left">
+												<i class="fa fa-user text-danger icon-lg"></i>
+											</div>
+											<div class="float-right">
+												<p class="mb-0 text-left">Total Active Users</p>
+												<div class="fluid-container">
+													<h3 class="font-weight-medium text-right mb-0"
+														th:text="${userStatus.activeUserCount + ' of ' +  userStatus.allUserCount}"></h3>
+												</div>
+											</div>
+										</div>
+										<p class="text-muted mt-3 mb-0">
+											<i class="fa fa-user-o mr-1" aria-hidden="true"></i>
+											Total Active Users At This Moment
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row"></div>
+						<br>
+						<div class="row">
+							<div class="col-xl-12 stretch-card">
+								<div class="card card-outline-success">
+									<div class="card-body">
+										<div class="clearfix">
+											<div class="float-left">
+												<i class="fa fa-book text-default icon-lg"></i>
+											</div>
+											<div class="float-right">
+												<p class="mb-0 text-right">App Version</p>
+												<div class="fluid-container">
+													<h3 class="font-weight-medium text-right mb-0"
+														th:text="${appVersion}"></h3>
+												</div>
+											</div>
+										</div>
+										<p class="text-muted mt-3 mb-0">
+											<i class="fa fa-book mr-1" aria-hidden="true"></i>Current
+												Software Version
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xl-6 pb-25" th:if="${wgt2}">
+						<div class="card card-outline-danger">
+							<div class="card-body">
+								<h5 class="align-center">Event & One-Click History for last
+									7 days</h5>
+								<div id="chart_div" style="  width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="col-xl-6 pb-25" th:if="${wgt3}">
+						<div class="card card-outline-danger">
+							<div class="card-body">
+								<h5 class="align-center">One-Click History for Each Banks
+									in Last 30 Days</h5>
+								<div id="bank_oneclick_chart_div"
+									style="width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+					</div>
+					<!-- </div> -->
+					<br>
+					<!-- <div class="row"> -->
+					<div class="col-xl-6 pb-25" th:if="${wgt4}">
+						<div class="card card-outline-danger">
+							<div class="card-body">
+								<h5 class="align-center">Event History for Each Banks in
+									Last 30 Days</h5>
+								<div id="bank-event-chart_div"
+									style="width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+					</div>
+
+
+					<br>
+					<div class="col-xl-6 pb-25" th:if="${wgt5}">
+						<div class="card card-outline-danger">
+							<div class="card-body">
+								<h5 class="align-center">Device Registration for Each Banks
+									in Last 7 Days</h5>
+								<div id="device_reg_chart_div"
+									style="width: 100%; height: 100%;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+
+
+			</div>
+		</div>
+
+
+		<script th:inline="javascript">
+
+        var event_data_7d = /*[[${eventData7D}]]*/'noValue';
+        var oneclick_data_7d = /*[[${oneClickData7D}]]*/'noValue';
+        var bank_Oneclick_data_30d = /*[[${bankOneClickData30D}]]*/'noValue';
+        var bank_event_data_30d = /*[[${bankEventData30D}]]*/'noValue';
+         var reg_device_data_7d = /*[[${bankRegDeviceData30D}]]*/'noValue';
+        
+        
+        $(document).ready(function() {
+            google.charts.load('current', {'packages':['corechart', 'line', 'bar']});
+            google.charts.setOnLoadCallback(drawAllEventsFor7D);
+            //google.charts.setOnLoadCallback(drawBankOneClick30D);
+            //google.charts.setOnLoadCallback(drawPieChart);
+             
+      		google.charts.setOnLoadCallback(drawBankOneClick30D);
+      		google.charts.setOnLoadCallback(drawBankEvent30D);
+      		google.charts.setOnLoadCallback(drawRegDevicePieChart);
+      		
+        });
+        function drawAllEventsFor7D() {
+        	google.charts.load('current', {'packages':['line']});
+            var data = new google.visualization.DataTable();
+          
+               var chartData = [
+		        
+		      ]; 
+
+              var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Day');
+		      data.addColumn('number', 'One-Click');
+		      data.addColumn('number', 'Event');
+		      
+		      
+		      Object.keys(oneclick_data_7d).forEach(function(key) {
+                chartData.push([ key, oneclick_data_7d[key],event_data_7d[key]]);
+            });
+		      console.log(chartData);
+		      data.addRows(chartData);
+        var options = {
+        	title: 'Event Count & One-Click setup count for last 7 days',
+          	curveType: 'function',
+          	legend: { position: 'bottom' },
+	        hAxis: {
+	          title: 'Date'
+	        },
+	        vAxis: {
+	          title: 'Count'
+	        },
+	        colors: ['#a52714', '#097138'],
+	        crosshair: {
+	          color: '#000',
+	          trigger: 'selection'
+	        }
+	      };
+	      
+	      	
+            var chart = new google.charts.Line(document.getElementById('chart_div'));
+            chart.draw(data, google.charts.Line.convertOptions(options));
+        }
+        
+        
+        
+        function drawBankOneClick30D() {
+	        var data = new google.visualization.DataTable();
+          
+               var chartData = []; 
+
+              var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Bank');
+		      data.addColumn('number', 'One-Click');
+		      //data.addColumn({type:'string', role:'style'});
+		      
+		      
+		      Object.keys(bank_Oneclick_data_30d).forEach(function(key) {
+                chartData.push([ key, bank_Oneclick_data_30d[key]]);
+            });
+		      console.log(chartData);
+		      data.addRows(chartData);
+	
+	        var options = {
+	          width: '100%',
+	          legend: { position: 'none' },
+	          colors: ['green', 'red', 'blue','green', 'red', 'blue','green', 'red', 'blue'],
+	          chart: {
+	            title: 'One-Click Setup coutn for last 30 days'
+	            //subtitle: 'popularity by percentage'
+	             },
+	          axes: {
+	            x: {
+	              0: { side: 'bottom', label: 'Bank'} // Top x-axis.
+	            },
+	            y: {
+	              0: { label: 'Count'} // Top x-axis.
+	            }
+	            
+	          },
+	          bar: { groupWidth: "25%" }
+	        };
+	
+	        var chart = new google.charts.Bar(document.getElementById('bank_oneclick_chart_div'));
+	        // Convert the Classic options to Material options.
+	        chart.draw(data, google.charts.Bar.convertOptions(options));
+	    };
+	    
+	    function drawBankEvent30D() {
+	        var data = new google.visualization.DataTable();
+          
+               var chartData = []; 
+
+              var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Bank');
+		      data.addColumn('number', 'Event');
+		      
+		      
+		      Object.keys(bank_event_data_30d).forEach(function(key) {
+                chartData.push([ key, bank_event_data_30d[key]]);
+            });
+		      console.log(chartData);
+		      data.addRows(chartData);
+	
+	        var options = {
+	          width: '100%',
+	          legend: { position: 'bottom' },
+	          chart: {
+	            title: 'Event count for last 30 days'
+	            
+	             },
+	          axes: {
+	            x: {
+	              0: { side: 'bottom', label: 'Bank'} // Top x-axis.
+	            },
+	            y: {
+	              0: { label: 'Count'} // Top x-axis.
+	            }
+	            
+	          },
+	          bar: { groupWidth: "25%" }
+	        };
+	
+	        var chart = new google.charts.Bar(document.getElementById('bank-event-chart_div'));
+	        // Convert the Classic options to Material options.
+	        chart.draw(data, google.charts.Bar.convertOptions(options));
+	    };
+	    
+	    
+	    function drawRegDevicePieChart() {
+	       var data = new google.visualization.DataTable();
+          
+               var chartData = []; 
+
+              var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Bank');
+		      data.addColumn('number', 'Event');
+		      
+		      
+		      Object.keys(reg_device_data_7d).forEach(function(key) {
+                chartData.push([ key, reg_device_data_7d[key]]);
+            });
+		      console.log(chartData);
+		      data.addRows(chartData);
+	
+	        var options = {
+	         width: '100%',
+	          legend: { position: 'right' },
+	          pieHole: 0.2,
+	        };
+	
+	        var chart = new google.visualization.PieChart(document.getElementById('device_reg_chart_div'));
+	        chart.draw(data, options);
+	    };
+	    
+	    
+	    function generateRandomColor(){
+		    let maxVal = 0xFFFFFF; // 16777215
+		    let randomNumber = Math.random() * maxVal; 
+		    randomNumber = Math.floor(randomNumber);
+		    randomNumber = randomNumber.toString(16);
+		    let randColor = randomNumber.padStart(6, 0);   
+		    return `#${randColor.toUpperCase()}`
+		}
+
+        
+    </script>
+
+	</div>
+
+</body>
+</html>

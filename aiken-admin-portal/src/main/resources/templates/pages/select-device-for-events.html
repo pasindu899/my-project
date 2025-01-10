@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-07-22
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>Select Devices</title>
+
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<h3 class="text-primary">Device Selection for New Events</h3>
+		<br>
+		<section class="my-2">
+			<div class="card"></div>
+			<div class="card">
+
+				<div class="card-body">
+					<h5 class="text-primary">Select the Required Device</h5>
+
+					<div class="card">
+						<div class="row">
+							<div class="col-md-2" align="left">
+								<form action="#"
+									th:action="@{/admin-portal/search-device-by-key-for-event(searchParam=${searchData})}"
+									th:object="${commonData}" method="get">
+
+									<div
+										style="padding: 5px; background-color: white; color: black;">
+										<p>Search with any text</p>
+
+										<div class="form-group input-group">
+
+											<input type="text" class="form-control"
+												placeholder="Search any text ..." id="searchData" th:field="*{searchData}"
+												data-toggle="tooltip" data-placement="top"
+												title="Search any text here...">
+												<button class="btn " th:classappend="${pageStatus.contains('Search Result of Text')} ? btn-secondary : btn-info" type="submit"
+													data-toggle="tooltip" data-placement="top"
+													title="Click here to search" value="Search" onclick="return CheckSearchText();">
+													<i class="fa fa-search"></i>
+												</button>
+										</div>
+
+									</div>
+								</form>
+							</div>
+							<div class="col-md-5 ">
+								<form action="#"
+									th:action="@{/admin-portal/search-device-by-dates-for-event}"
+									th:object="${commonDataForm}" method="post">
+
+									<div
+										style="padding: 5px; background-color: white; color: black;">
+										<p>Search Device with Date Range</p>
+
+										<div class="form-group input-group">
+											<span class="input-group-addon">From</span> <input
+												type="date" class="form-control" placeholder="YYYY-MM-DD"
+												id="startDate" th:field="*{startDate}" data-toggle="tooltip"
+												data-placement="top" title="Enter search starting date here">
+											<span class="input-group-addon">To</span> <input type="date"
+												class="form-control" placeholder="YYYY-MM-DD" id="endDate"
+												th:field="*{endDate}" data-toggle="tooltip"
+												data-placement="top" title="Enter search ending date here">
+											<span class="input-group-btn">
+												<button class="btn " th:classappend="${pageStatus.contains('Search Result of Dates')} ? btn-secondary : btn-info" type="submit"
+													data-toggle="tooltip" data-placement="top"
+													title="Search event for any date range" value="Search" onclick="return CheckSearchDates();">
+													<i class="fa fa-search"></i>
+												</button>
+											</span>
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- /.col-lg-4 -->
+							<div class="col-md-3">
+								<form action="#"
+									th:action="@{/admin-portal/search-device-by-ids-for-event(tid=${commonData.tid},mid=${commonData.mid})}"
+									th:object="${commonData}" method="get">
+
+									<div
+										style="padding: 5px; background-color: white; color: black;">
+										<p>Search Device with MID/TID</p>
+
+										<div class="form-group input-group">
+
+											<input type="text" class="form-control"
+												placeholder="Search MID ..." id="mid" th:field="*{mid}"
+												data-toggle="tooltip" data-placement="top"
+												title="Enter MID here to search"> <input type="text"
+												class="form-control" placeholder="Search TID ..." id="tid"
+												th:field="*{tid}" data-toggle="tooltip" data-placement="top"
+												title="Enter search ending date here"> <span
+												class="input-group-btn">
+												<button class="btn " th:classappend="${pageStatus.contains('Search Result in TID/MID')} ? btn-secondary : btn-info" type="submit"
+													data-toggle="tooltip" data-placement="top"
+													title="Search device for any MID or TID" value="Search" onclick="return CheckSearchIds();">
+													<i class="fa fa-search"></i>
+												</button>
+											</span>
+										</div>
+
+									</div>
+								</form>
+							</div>
+							<!-- /.col-lg-2 -->
+
+							<div class="col-md-2">
+								<div
+									style="margin-top: 25px; padding: 5px; background-color: white; color: black;">
+									<p></p>
+									<a th:href="@{/admin-portal/select-device}"
+										class ="btn " th:classappend="${pageStatus.contains('Today Updated Devices')} ? btn-secondary : btn-info" data-toggle="tooltip"
+										data-placement="top"
+										title="Click here to view today updated devices">Latest Devices</a>&nbsp
+									<!-- <a th:href="@{/admin-portal/select-all-device-for-event}"
+										class ="btn " th:classappend="${pageStatus.contains('All Devices')} ? btn-secondary : btn-info" data-toggle="tooltip"
+										data-placement="top" title="Click here to view all devices">All
+									</a> -->
+								</div>
+							</div>
+						</div>
+						<!-- /.row -->
+						<div class="alert alert-info" align="center">
+							<span th:text="${pageStatus}"></span>
+						</div>
+					</div>
+
+					<table id="deviceTable" border="1"
+						class="table table-striped table-bordered table-hover">
+
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Serial No</th>
+								<th>Bank</th>
+								<th>Merchant</th>
+								<th>Address</th>
+								<th>Contact</th>
+								<th>SIM</th>
+								<th>Last Update</th>
+								<th>Status</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="device : ${devicePage}">
+
+								<td th:text="${device.deviceId}"></td>
+								<td th:text="${device.serialNo}"></td>
+								<td th:text="${device.bankCode}"></td>
+								<td th:text="${device.merchantName}"></td>
+								<td th:text="${device.merchantAddress}"></td>
+								<td th:text="${device.custContactNo}"></td>
+								<td th:text="${device.simNo}"></td>
+								<td th:text="${device.lastUpdate}"></td>
+								<td th:text="${device.status}"></td>
+
+								<td><a
+									th:href="@{/admin-portal/new-event/{serialNo}(serialNo=${device.serialNo})}"
+									class="btn btn-success">Select</a></td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="11" align="center"><span
+									th:if="${devicePage.isEmpty()}" th:text="${tableStatus}"></span></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>

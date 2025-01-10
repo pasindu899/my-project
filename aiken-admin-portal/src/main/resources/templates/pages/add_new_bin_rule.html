@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-10-14 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Configure New BIN Rule</title>
+
+
+    <style>
+
+    </style>
+    <script type="text/javascript">
+    </script>
+
+</head>
+<body class="body-color">
+
+<div layout:fragment="content">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="modalSuccess" class="modal hide fade in show" data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Configure New Rule For BIN</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <form action="#" th:action="@{/admin-portal/new_rule_add_to_cart}"
+                                              th:object="${binConfigForm}"
+                                              method="post">
+
+                                            <div class="card">
+                                                <div class="card-body">
+
+
+                                                    <!-- <div hidden>
+                                                        <input id="merchantId" type="text"
+                                                               th:field="*{merchantId}" class="hidden"/>
+                                                    </div> -->
+
+                                                    <div id="div-binblocknewrule">
+
+                                                        <div class="row col-md-12">
+                                                            <div class="form-group col-md-2">
+                                                                <label for="cardType" class="col-form-label">Card
+                                                                    Type*</label> <select
+                                                                    id="cardType" class="form-control"
+                                                                    th:field="*{cardType}">
+                                                                <option th:value="'VISA'" th:text="VISA"></option>
+                                                                <option th:value="'MASTER'" th:text="MASTER"></option>
+                                                                <option th:value="'MAESTRO'" th:text="MAESTRO"></option>
+                                                                <option th:value="'AMEX'" th:text="AMEX"></option>
+                                                                <option th:value="'CUP'" th:text="CUP"></option>
+                                                                <option th:value="'JCB'" th:text="JCB"></option>
+
+                                                            </select>
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                                <label for="transType" class="col-form-label">Trans
+                                                                    Type*</label> <select
+                                                                    id="transType" class="form-control"
+                                                                    th:field="*{transType}">
+                                                                <option th:value="'ALL'" th:text="All"></option>
+                                                                <option th:value="'CONTACT'" th:text="Contact"></option>
+                                                                <option th:value="'CONTACTLESS'"
+                                                                        th:text="Contactless"></option>
+                                                                <option th:value="'EMV_FALLBACK'"
+                                                                        th:text="EMV-Fallback"></option>
+                                                                <option th:value="'MAG_ONLY'"
+                                                                        th:text="Mag-Only"></option>
+                                                                <option th:value="'DCC'" th:text="DCC"></option>
+                                                                <option th:value="'MANUAL_KEY_IN'"
+                                                                        th:text="Manual-Key-In"></option>
+                                                                <option th:value="'OFFLINE'" th:text="Offline"></option>
+                                                                <option th:value="'PRE_AUTH'"
+                                                                        th:text="Pre-Auth"></option>
+                                                            </select>
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                                <label for="action"
+                                                                       class="col-form-label">Action*</label> <select
+                                                                    id="action" class="form-control"
+                                                                    th:field="*{action}">
+                                                                <option th:value="'BLACKLIST'"
+                                                                        th:text="Blacklist"></option>
+                                                                <option th:value="'WHITELIST'"
+                                                                        th:text="Whitelist"></option>
+
+                                                            </select>
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                                <label for="ruleType"
+                                                                       class="col-form-label">Type*</label> <select
+                                                                    id="ruleType" class="form-control"
+                                                                    th:field="*{type}">
+                                                                <option th:value="'SINGLE'" th:text="Single"></option>
+                                                                <option th:value="'MULTIPLE'"
+                                                                        th:text="Multiple"></option>
+                                                                <option th:value="'FULL_RANGE'"
+                                                                        th:text="Full-Range"></option>
+                                                            </select>
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                                <label for="binStartFrom" class="col-form-label">BIN
+                                                                    Start From</label>
+                                                                <input id="binStartFrom" type="text"
+                                                                       class="form-control" th:field="*{binStartFrom}"
+                                                                       th:maxlength="8"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2 " id="binUpto">
+                                                                <label for="binEndFrom" class="col-form-label">BIN
+                                                                    Up-To </label>
+                                                                <input id="binEndFrom" type="text" class="form-control"
+                                                                       th:field="*{binEndFrom}" th:maxlength="8"/>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <input type="hidden" th:field="*{mid}" id="mid">
+                                                    <input type="hidden" th:field="*{tid}" id="tid">
+
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                        onClick="goBack()">Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary"
+                                                        onClick="return setMidTid()">Add
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

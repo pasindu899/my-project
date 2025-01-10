@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base-layout}">
+<head>
+<title>View Device</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<!-- Merchant Cart Start -->
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12">
+					<h3 class="text-center">View Device</h3>
+					<h5 class="text-primary">Merchant Configuration</h5>
+					<div class="col-md-12">
+						<table class="table table-striped table-responsive-md">
+							<tr>
+								<th>ID</th>
+								<th>Type</th>
+								<th>MID</th>
+								<th>TID</th>
+								<th>Currency</th>
+								<th>Description</th>
+								<th>MIN Amount</th>
+								<th>MAX Amount</th>
+							</tr>
+							<tbody>
+								<tr th:each="merchant : ${merchants}">
+									<td th:text="${merchant.merchantId}"></td>
+									<td th:text="${merchant.type}"></td>
+									<td th:text="${merchant.mid}"></td>
+									<td th:text="${merchant.tid}"></td>
+									<td th:text="${merchant.currency}"></td>
+									<td th:text="${merchant.description}"></td>
+									<td th:text="${merchant.minAmount}"></td>
+									<td th:text="${merchant.maxAmount}"></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- Merchant Cart End -->
+
+				<div class="col-md-12">
+					<h5 class="text-primary">Other Configuration</h5>
+
+					<form action="#" th:action="@{/admin-portal/edit-device}"
+						th:object="${deviceForm}" method="post">
+
+						<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+							<p>Please Correct Errors Below</p>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label for="serialNo" class="col-form-label">Serial No *</label>
+								<input id="serialNo" type="text" th:field="*{serialNo}"
+									th:readonly="true" class="form-control" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="bankName" class="col-form-label">Bank *</label> <input
+									id="bankName" type="text" th:field="*{bankName}"
+									class="form-control" th:readonly="true" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="merchantName" class="col-form-label">Merchant
+									Name *</label> <input id="merchantName" type="text"
+									th:field="*{merchantName}" class="form-control"
+									th:readonly="true" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="merchantAddress" class="col-form-label">Merchant
+									Address *</label> <input id="merchantAddress" type="text"
+									th:field="*{merchantAddress}" class="form-control"
+									th:readonly="true" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label for="channelUserId" class="col-form-label">Channel
+									User Id *</label> <input id="channelUserId" type="text"
+									th:field="*{channelUserId}" class="form-control"
+									th:readonly="true" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="channelPassword" class="col-form-label">Channel
+									Password *</label> <input id="channelPassword" type="text"
+									th:field="*{channelPassword}" class="form-control"
+									th:readonly="true" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="merchantUserId" class="col-form-label">Merchant
+									User Id *</label> <input id="merchantUserId" type="text"
+									th:field="*{merchantUserId}" class="form-control"
+									th:readonly="true" />
+							</div>
+							<div class="form-group col-md-3">
+								<label for="merchantPassword" class="col-form-label">Merchant
+									Password *</label> <input id="merchantPassword" type="text"
+									th:field="*{merchantPassword}" class="form-control"
+									th:readonly="true" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="checksumKey" class="col-form-label">Checksum
+									Key *</label> <input id="checksumKey" type="text"
+									th:field="*{checksumKey}" class="form-control"
+									th:readonly="true" />
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col-md-1">
+								<input id="autoSettle" type="checkbox" th:field="*{autoSettle}"
+									class="form-control" th:readonly="true" />
+							</div>
+							<div class=" col-md-2">
+								<label for="autoSettle" class="col-form-label">Auto
+									Settlement</label>
+							</div>
+
+							<div class=" col-md-2">
+								<label for="autoSettleTime" class="col-form-label">Auto
+									Settlement Time</label>
+							</div>
+							<div class=" col-md-2">
+								<input id="autoSettleTime" type="text"
+									th:field="*{autoSettleTime}" class="form-control"
+									th:readonly="true" />
+							</div>
+						</div>
+						<p></p>
+
+						<div class="row">
+							<div class=" col-md-1">
+								<input id="forceSettle" type="checkbox"
+									th:field="*{forceSettle}" class="form-control"
+									th:readonly="true" />
+							</div>
+							<div class=" col-md-2">
+								<label for="forceSettle" class="col-form-label">Force
+									Settlement</label>
+							</div>
+							<div class=" col-md-1">
+								<input id="ecr" type="checkbox" th:field="*{ecr}"
+									class="form-control" th:disabled="true" />
+							</div>
+							<div class=" col-md-2">
+								<label for="ecr" class="col-form-label">ECR Enable</label>
+							</div>
+
+							<div class=" col-md-1">
+								<input id="keyIn" type="checkbox" th:field="*{keyIn}"
+									class="form-control" th:disabled="true" />
+							</div>
+							<div class=" col-md-2">
+								<label for="keyIn" class="col-form-label">Key-in Enable</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-3">
+								<label for="custContactNo" class="col-form-label">Customer Contact No</label>
+								<input id="custContactNo" type="text" th:field="*{custContactNo}" class="form-control"/>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="simNo" class="col-form-label">SIM No</label>
+								<input id="simNo" type="text" th:field="*{simNo}" class="form-control"/>
+							</div>
+
+							<div class="form-group col-md-3">
+								<label for="mobileNo" class="col-form-label">Mobile No</label>
+								<input id="mobileNo" type="text" th:field="*{mobileNo}" class="form-control"/>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="remark" class="col-form-label">Remark</label>
+								<input id="remark" type="text" th:field="*{remark}" class="form-control"/>
+							</div>
+						</div>
+
+						<p></p>
+
+
+						<div class="row">
+							<div class="col-md-4">
+
+								<!-- <input type="submit" class="btn btn-primary" value="Push Device"> -->
+
+							</div>
+							<!--<input type="submit" class="btn btn-primary"
+								value="Modify Device">-->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<th:block th:fragment="optional">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	</th:block>
+</body>
+</html>

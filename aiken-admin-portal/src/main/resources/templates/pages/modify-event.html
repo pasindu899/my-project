@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!-- 	 
+	@author Nandana Basnayake
+	@version 1.0
+	@since 2021-07-07 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base-layout}">
+<head>
+    <title>Modify Events</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="col-md-12">
+        <br>
+        <h3 class="text-primary">Modify Event Configurations</h3>
+        <br>
+        <div>
+
+            <form action="#" th:object="${device}">
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Please Correct Errors Below</p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Device Information</h5>
+
+                        <div class="row">
+                            <div class="form-group col-md-3">
+                                <label for="serialNo" class="col-form-label">Serial No
+                                    *</label> <input id="serialNo" type="text" th:field="*{serialNo}"
+                                                     class="form-control" readonly/> <span class="help-block"
+                                                                                           th:if="${#fields.hasErrors('serialNo')}">
+										<p th:errors="*{serialNo}" class="text-danger">Invalid
+											Device Serial Number</p>
+									</span>
+
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="bankName" class="col-form-label">Bank Name
+                                    *</label> <input id="bankName" type="text" th:field="*{bankName}"
+                                                     class="form-control" readonly/> <span class="help-block"
+                                                                                           th:if="${#fields.hasErrors('bankName')}">
+										<p th:errors="*{bankName}" class="text-danger">Invalid
+											Bank Name</p>
+									</span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="merchantName" class="col-form-label">Merchant
+                                    Name *</label> <input id="merchantName" type="text"
+                                                          th:field="*{merchantName}" class="form-control" readonly/>
+                                <span
+                                        class="help-block"
+                                        th:if="${#fields.hasErrors('merchantName')}">
+										<p th:errors="*{merchantName}" class="text-danger">Invalid
+											Bank Name</p>
+									</span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="merchantAddress" class="col-form-label">Merchant
+                                    Address *</label> <input id="merchantAddress" type="text"
+                                                             th:field="*{merchantAddress}" class="form-control"
+                                                             readonly/>
+                                <span class="help-block"
+                                      th:if="${#fields.hasErrors('merchantAddress')}">
+										<p th:errors="*{merchantAddress}" class="text-danger">Invalid
+											Bank Name</p>
+									</span>
+                            </div>
+                        </div>
+
+                        <div class="row"></div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <div class="row">
+            <br>
+        </div>
+        <div>
+            <form action="#"
+                  th:action="@{/admin-portal/save-update-event}"
+                  th:object="${eventForm}" method="post">
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p>Please Correct Errors Below</p>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-primary">Please Enter Event Type and Event
+                            Date & Time</h5>
+
+                        <div class="row">
+
+                            <div hidden>
+                                <input id="serialNo1" type="text"
+                                       th:field="*{serialNo}" class="hidden" readonly/>
+                            </div>
+                            <div hidden>
+                                <input id="eventId" type="text"
+                                       th:field="*{eventId}" class="hidden" readonly/>
+                            </div>
+                            <div hidden>
+                                <input id="executeTypeH" type="text"
+                                       th:field="*{executeType}" class="hidden"  name="executeType" readonly/>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label for="eventType" class="col-form-label">Event
+                                    Type*</label> <select id="eventType" th:field="*{eventType}"
+                                                          class="form-control">
+                                <option th:each="events : ${eventTypes}"
+                                        th:value="${events.code}" th:text="${events.name}"/>
+                            </select>
+
+                            </div>
+                            <div class="form-group col-md-3 display-off" id="merchTransType">
+                                <label for="merchantTransType" class="col-form-label">Transaction
+                                    Type</label> <select id="merchantTransType" th:field="*{merchantTransType}"
+                                                         class="form-control">
+                                <option th:each="saleMerchType : ${saleMerchantTypes}"
+                                        th:value="${saleMerchType.code}" th:text="${saleMerchType.name}"/>
+                            </select>
+                            </div>
+                            <div class="form-group col-md-3 display-off" id="merchantList">
+                                <label for="merchantList" class="col-form-label">Merchant
+                                </label> <select id="clearMerchant" th:field="*{clearMerchant}"
+                                                 class="form-control">
+                                <option th:each="clearMerchanInfo : ${clearMerchantList}"
+                                        th:value="${clearMerchanInfo.merchantId}"
+                                        th:text="${clearMerchanInfo.category + '   ' + clearMerchanInfo.mid + '    ' + clearMerchanInfo.tid + '    ' + clearMerchanInfo.currency}"/>
+                            </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dateFrom" class="col-form-label">Event
+                                    Start Date & Time *</label> <input id="dateFrom" type="datetime-local"
+                                                                       th:field="*{dateFrom}" class="form-control"
+                                                                       placeholder="YYYY-MM-DD-HH:MM:SS"/> <span
+                                    class="help-block" th:if="${#fields.hasErrors('dateFrom')}">
+										<p th:errors="*{dateFrom}" class="text-danger">Invalid
+											Date. Date Format:YYYY-MM-DD-HH:MM:SS</p>
+									</span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="dateTo" class="col-form-label">Event End
+                                    Date & Time *</label><input id="dateTo" th:field="*{dateTo}"
+                                                                type="datetime-local" class="form-control"
+                                                                placeholder="YYYY-MM-DD-HH:MM:SS"/> <span
+                                    class="help-block" th:if="${#fields.hasErrors('dateTo')}">
+										<p th:errors="*{dateTo}" class="text-danger">Invalid Date.
+											Date Format:YYYY-MM-DD-HH:MM:SS</p>
+									</span>
+                            </div>
+                            <div class="form-group col-md-3" id="onetime-Password">
+                                <label for="dateTo" class="col-form-label">Onetime Settings Password *</label>
+                                <input id="onetimePassword" type="text" pattern="\d{8}" th:field="*{onetimePassword}"
+                                       th:maxlength="8" th:minlength="8"
+                                       class="form-control"/> <span class="help-block"
+                                                                    th:if="${#fields.hasErrors('onetimePassword')}">
+										<p th:errors="*{onetimePassword}" class="text-danger">Invalid
+											Onetime Password</p>
+									</span>
+                            </div>
+
+                        </div>
+                        <div id="div-report" class="display-off">
+                            <h6 class="text-primary">Please Select Transaction Type and Date Range for the required
+                                Reports</h6>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="transactionType" class="col-form-label">Transaction
+                                        Type *</label> <select id="transactionType" th:field="*{type}"
+                                                               class="form-control">
+                                    <option th:each="transactionType : ${transactionTypes}"
+                                            th:value="${transactionType.code}" th:text="${transactionType.name}"/>
+                                </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="dateFrom" class="col-form-label">Report
+                                        From (Date) *</label> <input id="reportFromDate" type="date"
+                                                                     th:field="*{reportFromDate}" class="form-control"
+                                                                     placeholder="YYYY-MM-DD"/>
+                                    </span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="dateTo" class="col-form-label">Report To
+                                        (Date)*</label> <input id="reportToDate" th:field="*{reportToDate}"
+                                                               type="date" class="form-control"
+                                                               placeholder="YYYY-MM-DD"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <h6 class="text-primary">Please Select Execute Type </h6>
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label class="col-form-label">Execute Type*</label>
+                                    <select id="executeType" th:field="*{executeType}"
+                                            class="form-control">
+                                        <option th:each="executeType : ${executeTypes}"
+                                                th:value="${executeType.code}" th:text="${executeType.name}"/>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 align-right">
+                                <div>
+                                    <input type="submit"
+                                           class="btn btn-success"
+                                           value="Update Changes"/> <a
+                                        th:href="@{/admin-portal/view-events}"
+                                        class="btn btn-secondary"><i> Cancel</i></a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<th:block th:fragment="optional">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+</th:block>
+
+</body>
+</html>

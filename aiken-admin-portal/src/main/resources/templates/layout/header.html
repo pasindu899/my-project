@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed-top" >
+
+			<a class="navbar-brand navbar-dark" href="#"><img
+				th:src="@{/images/logo_36_36.png}" />&nbsp Admin Portal &nbsp<i
+				class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#dataTarget" aria-controls="navbarText"
+				aria-expanded="true" aria-label="Admin Portal">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse justify-content-md-center"
+				id="dataTarget">
+				<ul class="navbar-nav mr-auto" th:with="view=${#httpServletRequest.getServletPath()}">
+					<li th:classappend="${#strings.endsWith(view,'/admin-portal')? 'active selected' : 'active'}" class="nav-item"><a class="nav-link "
+						th:href="@{/admin-portal}"><i class="fas fa-home"></i>&nbsp
+							Dashboard</a></li> 
+					<li id="navReg" th:classappend="${#strings.startsWith(view,'/admin-portal/register-new-device')? 'active selected' 
+										: #strings.startsWith(view,'/admin-portal/new-merchant')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/add-new-profile')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/register-device')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/modify-new-merchant')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/new-add-to-cart')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/configure-profile-merchant')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/modify-new-profile')? 'active selected' 
+										: #strings.startsWith(view,'/admin-portal/modify-selected-profile')? 'active selected' 
+										: #strings.startsWith(view,'/admin-portal/save-device')? 'active selected'
+										: 'active'}" class="nav-item"><a class="nav-link" 
+						th:href="@{/admin-portal/register-new-device}"> <i
+							class="fas fa-plus"></i>&nbsp Registration</a> </li>  
+							
+					<li id="navdev" th:classappend="${#strings.startsWith(view,'/admin-portal/view-devices')? 'active selected' 
+										: #strings.startsWith(view,'/admin-portal/view-device')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/view-all-devices')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-devices-by-key')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-devices-by-dates')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/modify-device')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/modify-current-merchant')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/add-another-merchant')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/view-profile')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/add-another-profile')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/configure-another-profile-merchant')? 'active selected' 
+										: #strings.startsWith(view,'/admin-portal/modify-current-profile')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/modify-profile')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/setting-config')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/tid-devices-details')? 'active selected': 'active'}" 
+										class="nav-item"><a class="nav-link"
+						th:href="@{/admin-portal/view-devices}"><i class="fas fa-list"></i>&nbsp
+							Devices</a></li>
+							
+					<li id="navEvnt" th:classappend="${#strings.startsWith(view,'/admin-portal/view-events')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-event-by-key')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/view-all-events')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/select-device')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-device-by-key-for-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/select-all-device-for-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-device-by-dates-for-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/new-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/update-event')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-device-by-ids-for-event')? 'active selected': 'active'}" 
+										 class="nav-item"><a class="nav-link"
+						th:href="@{/admin-portal/view-events}"><i
+							class="fas fa-calendar"></i>&nbsp Events</a></li>
+
+					<li id="navAct" th:classappend="${#strings.startsWith(view,'/admin-portal/view-reports')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/search-activities-by-serial-no')? 'active selected': 'active'}"
+						class="nav-item"><a class="nav-link"
+											th:href="@{/admin-portal/view-reports}"><i class="fas fa-file-text"></i>&nbsp
+						Reports</a></li>
+					
+					<li class="nav-item dropdown" th:classappend="${#strings.startsWith(view,'/admin-portal/view-users')? 'active selected'
+										: #strings.startsWith(view,'/admin-portal/register-user')? 'active selected': 'active'}" th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <i class="fas fa-users"></i>&nbsp Users
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				         <a class="dropdown-item text-blue" th:href="@{/admin-portal/view-users}" th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}"><i class="fa fa-users fa-blue" aria-hidden="true"></i>  View Users</a> 
+                         <a class="dropdown-item" th:href="@{/admin-portal/register-user}" th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}"><i class="fa fa-user-plus fa-blue" aria-hidden="true"></i>  Register New User</a>
+				          <div class="dropdown-divider"></div>
+				          <a class="dropdown-item" href="#"><i class="fa fa-cogs" aria-hidden="true"></i>  Settings</a>
+				        </div>
+				      </li>
+				      <li class="nav-item dropdown" th:classappend="${#strings.startsWith(view,'/admin-portal/dashboard-config')? 'active selected'
+										:  'active'}" th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}">
+				        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				          <i class="fas fa-cogs"></i>&nbsp Settings
+				        </a>
+				        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+				         <a class="dropdown-item text-blue" th:href="@{/admin-portal/dashboard-config}" th:if="${userrole=='ROLE_ADMIN'}"><i class="fa fa-tachometer fa-blue" aria-hidden="true"></i>  Dashboard Settings</a> 
+                         
+				          <div class="dropdown-divider"></div>
+				          <a class="dropdown-item" th:href="@{/admin-portal/configurations}"  th:if="${userrole=='ROLE_ADMIN'}"  > <i class="fa fa-cogs" aria-hidden="true"></i>  Configurations</a>
+				        </div>
+				      </li>
+				</ul>
+				<span class="navbar-text navbar-right justify-content-md-center">
+					Signed in as: <a href="#" class="navbar-link"><span
+						th:text="${user}"></span></a>&nbsp&nbsp
+				</span> <!-- <span class="navbar-text navbar-right justify-content-md-center">
+					<a href="#" th:href="@{/logout}" class="navbar-link btn btn-dark">Sign
+						out </a>
+				</span> -->
+				<!-- <div th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}">
+                     <a class="dropdown-toggle btn btn-primary "  href="#" role="button" id="dropdownMenuLink"
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <i class="fas fa-cog fa-sm fa-fw "></i>
+                     </a>
+                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in "
+                         aria-labelledby="dropdownMenuLink">
+                         <div class="dropdown-header">User Management</div>
+                         <a class="dropdown-item text-blue" th:href="@{/admin-portal/view-users}" th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}"><i class="fa fa-users fa-blue" aria-hidden="true"></i>  View Users</a> 
+                         <a class="dropdown-item" th:href="@{/admin-portal/register-user}" th:if="${userrole=='ROLE_ADMIN' or userrole=='ROLE_MANAGER'}"><i class="fa fa-user-plus fa-blue" aria-hidden="true"></i>  Register New User</a>
+                         <div class="dropdown-divider"></div>
+                         <a class="dropdown-item" href="#"><i class="fa fa-cogs" aria-hidden="true"></i>  Settings</a>
+                     </div>
+                 </div> -->
+				<span class="navbar-text navbar-right justify-content-md-center">
+					<i class="fas fa-fw "></i>
+					
+				</span>
+				<span class="navbar-text navbar-right justify-content-md-center">
+					<a href="#modelLogout" class="trigger-btn btn btn-primary default" data-toggle="modal"><i class="fas fa-user-circle"></i></a>
+				</span>
+			
+				
+				<div>
+						<div id="modelLogout" class="modal hide fade in show" data-keyboard="false" data-backdrop="dynamic">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							      	<div class="card-body">
+							           	<img class="round-border-50 img-center shadow h-100" th:src="@{/images/img_profile.png}" alt="Avatar" style="width:100px">
+								     	<br>
+							       		<div class="align-center div-margin-0">
+										      <p class="text-align-center">
+										     		<strong class="fs-25" th:text="' ' + ${firstname} + ' ' + ${lastname}"></strong>
+										     		<br>
+										     		<i th:text="${user}"></i>
+										     </p>
+										</div>
+								    </div>
+							      </div>
+							      <div class="modal-body">
+							        <div>
+							            <form action="#" 
+							            	method="post"> 
+							                
+							                	<p class="text-center" th:text="'Hi ' + ${user} + '. You can change your account details such as login Credentials and more
+							                	from Manage your Account section below'">
+							            </form>
+							        </div>
+							      </div>
+								  <div class="modal-footer align-center">
+									        <a class="btn btn-default default align-center"  th:href="@{/admin-portal/manage-account}" >Manage your Account</a>
+  
+								</div>
+								<div class="modal-footer">
+									       
+									        <a href="#" th:href="@{/logout}" class="btn btn-secondary">Sign out </a>
+								</div>
+							      
+							    </div>
+							  </div>
+						</div>          		                
+					</div>
+				
+			</div>
+		</nav>
+	</th:block>
+</body>
+</html>

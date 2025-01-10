@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- 
+	Application Base Layout
+	
+	@author Asela Liyanage
+	@version 1.0
+	@since 2021-01-30 
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE"></title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+</head>
+<body>
+
+	<!-- Main Navigation -->
+	<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+		<a class="navbar-brand" th:href="@{/admin-portal}">Aiken Admin Portal - 1.0</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbar" aria-controls="navbar" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse justify-content-md-center"  id="navbar">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="nav-link "
+					th:href="@{/admin-portal}">Home</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/admin-portal/view-devices}">View Devices</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					th:href="@{/admin-portal/register-new-device}">Register Device</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Content Section -->
+	<section layout:fragment="content"></section>
+
+	<!-- Footer -->
+	<footer class="container py-5">
+		<div class="row">
+			<div class="col-md-12">
+				<p class="text-muted">&copy; 2021 Aiken (Pvt) Ltd. All rights
+					reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Optional Section -->
+	<th:block layout:fragment="optional" />
+
+</body>
+</html>
